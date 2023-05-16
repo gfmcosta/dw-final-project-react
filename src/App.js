@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import SplashPage from './app/SplashPage';
 import LoginPage from './app/LoginPage';
+import RegistrationPage from './app/RegistrationPage';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <SplashPage/>
+          <RegistrationPage/>
     </div>
   );
 }

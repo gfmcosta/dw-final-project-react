@@ -9,6 +9,7 @@ class SplashPage extends Component {
     render() {
         return (
             <div>
+
                 <Navbar bg="light" expand="lg" variant="light" fixed="top">
                     <Container>
                         <Navbar.Brand href="#home" className="fw-bold">Loja de Roupa</Navbar.Brand>
@@ -30,6 +31,19 @@ class SplashPage extends Component {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
+
+                {/* ----------------------------------- teste
+                <div className="sub-menu-bar">
+                    <Container>
+                        <Nav>
+                            <Nav.Link href="#verao" className="text-uppercase">Verão</Nav.Link>
+                            <Nav.Link href="#primavera" className="text-uppercase">Primavera</Nav.Link>
+                            <Nav.Link href="#outono" className="text-uppercase">Outono</Nav.Link>
+                        </Nav>
+                    </Container>
+                </div>
+                */}
+
                 <br></br><br></br><br></br><br></br>
                 <Container>
                     <Row>
