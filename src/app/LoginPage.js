@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Nav} from 'react-bootstrap';
 
 class LoginPage extends Component {
     state = {  }
@@ -30,6 +30,7 @@ class LoginPage extends Component {
             </Button>
             <br></br><br></br>
             <Button variant="secondary" type="submit" className="w-100">
+              <Nav.Link href="registration"></Nav.Link>
               Registar
             </Button>
           </Form>

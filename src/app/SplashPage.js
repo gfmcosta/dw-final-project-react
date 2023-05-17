@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, Button, Navbar, Nav } from 'react-bootstrap';
 import { FaShoppingCart, FaUserCircle } from 'react-icons/fa';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import ProdutosPage from './ProdutosPage';
+
 
 class SplashPage extends Component {
     state = { 
@@ -9,21 +12,23 @@ class SplashPage extends Component {
     render() {
         return (
             <div>
-
                 <Navbar bg="light" expand="lg" variant="light" fixed="top">
                     <Container>
                         <Navbar.Brand href="#home" className="fw-bold">Loja de Roupa</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="ms-auto">
-                                <Nav.Link href="#home" className="text-uppercase">Ínicio</Nav.Link>
-                                <Nav.Link href="#produtos" className="text-uppercase">Produtos</Nav.Link>
-                                <Nav.Link href="#contato" className="text-uppercase">Contactos</Nav.Link>
+                                <Nav.Link href="inicio" className="text-uppercase">Inicio</Nav.Link>
+                                <Nav.Link href="produtos" className="text-uppercase">Produtos</Nav.Link>
+                                <Nav.Link href="contactos" className="text-uppercase">Contactos</Nav.Link>
+                                <Nav.Link href="cart" className="d-flex align-items-center">
+                                <FaShoppingCart className="me-2" />
+                                </Nav.Link>
                                 {/* <Nav.Link href="#carrinho" className="d-flex align-items-center">
                                 <FaShoppingCart className="me-2" />
                                 <span>Carrinho</span>
                                 </Nav.Link> */}
-                                <Nav.Link href="LoginPage" className="d-flex align-items-center">
+                                <Nav.Link href="login" className="d-flex align-items-center">
                                 <FaUserCircle className="me-2" />
                                 <span>Iniciar Sessão</span>
                                 </Nav.Link>
@@ -86,7 +91,7 @@ class SplashPage extends Component {
                         </Col>
                     </Row>
                 </Container>
-            </div>  
+            </div>
         );
     }
 }
