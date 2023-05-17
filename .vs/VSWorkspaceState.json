@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public",
+    "\\src"
   ],
-  "SelectedNode": "\\C:\\DWEB\\React",
   "PreviewInSolutionExplorer": false
 }

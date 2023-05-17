@@ -1,0 +1,86 @@
+html{
+    overflow-x: hidden;
+}
+
+.main-div{
+    align-items: center;
+    align-content: center;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 2%;
+}
+
+.img-container{
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    float: left;
+    width: 33.33%;
+    height: 650px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.main-images{
+    height: inherit;
+    border-radius: 3%;
+    user-select: none;
+}
+
+.word{
+    position:absolute;
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    bottom: 20%;
+    width: 100%;
+    user-select: none;
+}
+
+.main-images:hover{
+    transform: scale(1.2);
+    transition: transform 0.8s;
+    cursor: pointer;
+}
+
+.word:hover{
+    cursor: pointer;
+}
+
+.mb-4{
+    height: 200px;
+    display: flex;
+    margin: 0px auto;
+}
+
+.title{
+    color: rgb(0, 0, 0);
+    font: helvetica;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+}
+
+.text-uppercase{
+    float: left;
+}
+
+#basic-navbar-nav{
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%, -5%);
+    margin: 0px auto;
+    float: left;
+}
+ 
+.container{
+    height: 100px;
+    width: 100vh;
+}
