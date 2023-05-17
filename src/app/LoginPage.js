@@ -29,8 +29,7 @@ class LoginPage extends Component {
               Entrar
             </Button>
             <br></br><br></br>
-            <Button variant="secondary" type="submit" className="w-100">
-              <Nav.Link href="registration"></Nav.Link>
+            <Button variant="secondary" type="submit" className="w-100" href='/registration'>
               Registar
             </Button>
           </Form>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './RegistrationPage.css';
-import backgroundImage from './RegistrationPage_image.jpg';
+import backgroundImage from './images/RegistrationPage_image.jpg';
 
 function RegistrationPage() {
     const [formData, setFormData] = useState({

@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<SplashPage />} />
         <Route path="/produtos" element={<ProdutosPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<ProdutosPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
       </Routes>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
