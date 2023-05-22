@@ -7,7 +7,6 @@ import "./SplashPage.css"
 
 class SplashPage extends Component {
   state = {};
-
   render() {
     return (
       <div>
