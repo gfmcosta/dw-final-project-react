@@ -26,7 +26,7 @@ class LoginPage extends Component {
         redirect: 'follow'
       };
   
-      fetch("https://localhost:7122/User/Login/0/0", requestOptions)
+      fetch(`https://localhost:7122/User/Login/${this.state.email}/${this.state.password}`, requestOptions)
         .then(res => console.log(res))
         .then(result => this.setState({ resultado: result }))
         .catch(error => console.log('error', error));
