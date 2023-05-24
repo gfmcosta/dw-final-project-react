@@ -6,7 +6,7 @@ class LoginPage extends Component {
     state = { 
         email: '',
         password: '',
-        resultado: null
+        user: []
     }
 
 
@@ -21,18 +21,33 @@ class LoginPage extends Component {
     handleLogin(){
       console.log("Email: " + this.state.email);
       console.log("Password: " + this.state.password);
+      
+      // fetch(`https://localhost:7122/User/Login/${this.state.email}/${this.state.password}`, requestOptions)
+      // .then(res =>{
+        //   if (res.status === 200){
+          //     window.location.href = "/";
+          //   }else{
+            //     alert("Email ou password incorretos");
+            //   }            
+            // })
+            // .catch(error => console.log('error', error));
+            
       var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
-  
       fetch(`https://localhost:7122/User/Login/${this.state.email}/${this.state.password}`, requestOptions)
-        .then(res => console.log(res))
-        .then(result => this.setState({ resultado: result }))
+        .then(res => res.json())
+        .then(result => {
+          this.setState({ user: result });
+          if (this.state.user != [] || this.state.user!= null || this.state.user!= undefined){
+            window.location.href = "/";
+          }else{
+            alert("Email ou password incorretos");
+          }
+        })
         .catch(error => console.log('error', error));
-      // window.location.href="/";
     }
-
 
     render() {
         return (
