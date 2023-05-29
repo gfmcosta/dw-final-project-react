@@ -5,12 +5,14 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import ProdutosPage from './app/ProdutosPage';
 import LoginPage from './app/LoginPage';
 import RegistrationPage from './app/RegistrationPage';
+import Layout from './app/Layout';
 
 function App() {
   return (
     <div className="App">
+      <Layout/>
       <Routes>
-        <Route path="/" element={<SplashPage/>} />
+        <Route index element={<SplashPage/>} />
         <Route path="/produtos" element={<ProdutosPage/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/registration" element={<RegistrationPage/>} />
