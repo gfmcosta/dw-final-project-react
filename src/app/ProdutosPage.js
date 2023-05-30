@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, Button, Form, Navbar, Nav } from 'react-bootstrap';
-import { FaShoppingBag, FaUserCircle } from 'react-icons/fa';
+import { Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
 import "./ProdutosPage.css"
 
 class ProdutosPage extends Component {

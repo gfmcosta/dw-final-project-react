@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button,Navbar, Nav } from 'react-bootstrap';
-import { FaShoppingBag, FaUserCircle } from 'react-icons/fa';
-import Layout from './Layout';
+import { Container, Row, Col, Form, Button} from 'react-bootstrap';
 class LoginPage extends Component {
     state = { 
         email: '',
@@ -43,8 +41,8 @@ class LoginPage extends Component {
     
     render() {
         return (
-            <div style={{backgroundColor: 'cyan'}}>
-              <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh', backgroundColor: 'cyan', marginTop:'9%'}}>
+            <div style={{backgroundColor: '#FD8137'}}>
+              <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh', backgroundColor: '#FD8137', marginTop:'7%'}}>
                 <Row>
                   <Col xs={12} md={12} className="bg-light rounded p-5">
                     <h1 className="text-center mb-5" style={{textAlign: 'center'}}>Iniciar Sessão</h1>

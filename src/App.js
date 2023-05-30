@@ -1,11 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
 import SplashPage from './app/SplashPage';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import {Route, Routes } from 'react-router-dom';
 import ProdutosPage from './app/ProdutosPage';
 import LoginPage from './app/LoginPage';
 import RegistrationPage from './app/RegistrationPage';
 import Layout from './app/Layout';
+
+const RegistrationLayout = ({ children }) => {
+  return (
+    <div style={{ backgroundColor: '#FD8137', minHeight: '100vh' }}>
+      {children}
+    </div>
+  );
+};
 
 function App() {
   return (
@@ -13,9 +20,16 @@ function App() {
       <Layout/>
       <Routes>
         <Route index element={<SplashPage/>} />
-        <Route path="/produtos" element={<ProdutosPage/>} />
+        <Route path="/produtos" element={<ProdutosPage />} />
         <Route path="/login" element={<LoginPage/>} />
-        <Route path="/registration" element={<RegistrationPage/>} />
+        <Route
+          path="/registration"
+          element={
+            <RegistrationLayout>
+              <RegistrationPage />
+            </RegistrationLayout>
+          }
+        />
       </Routes>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

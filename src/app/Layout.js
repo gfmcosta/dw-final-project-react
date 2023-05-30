@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, Button, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FaShoppingBag, FaUserCircle } from 'react-icons/fa';
-import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import "./SplashPage.css"
 
