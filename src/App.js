@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <Layout/>
       <Routes>
-        <Route index element={<ProfilePage/>} />
+        <Route index element={<SplashPage/>} />
         <Route path="/produtos" element={<ProdutosPage />} />
         <Route path="/login" element={<LoginPage/>} />
         <Route
@@ -31,7 +31,7 @@ function App() {
             </RegistrationLayout>
           }
         />
-        <Route path="/profile" element/>
+        <Route path="/profile" element={<ProfilePage/>}/>
       </Routes>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

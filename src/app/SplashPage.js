@@ -13,6 +13,7 @@ class SplashPage extends Component {
     console.log(JSON.parse(sessionStorage.getItem('user')));
     if (JSON.parse(sessionStorage.getItem('user'))!= null){
       this.setState({isLoggedIn: true});
+
     }else{
       this.setState({isLoggedIn: false});
     }

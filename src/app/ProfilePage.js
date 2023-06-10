@@ -4,6 +4,7 @@ import "./ProfilePage.css"
 
 class ProfilePage extends Component{
     state={
+      editMode: false,
       name: '',
       email: '',
       password: '',
@@ -13,6 +14,30 @@ class ProfilePage extends Component{
       dataNasc:'',
       gender: '',
       imagePath: '',
+      storedUser: '',
+    }
+
+    async componentDidMount(){
+      //this.setState({ storedUser: sessionStorage.getItem('user') });
+      //this.setState({ email: this.state.storedUser.email });
+      const storedUser = sessionStorage.getItem('user');
+      const user = JSON.parse(storedUser)
+      const email = user.email;
+      console.log(email);
+      
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      let res = await fetch(`http://localhost:5072/API/Profile/${email}`, requestOptions).catch(error => console.log('error', error));
+      let result = await res.json();
+      if (res.status==200){
+        console.log(result)
+        const { name, phoneNumber, address, postalCode, gender, imagePath} = result;
+        const { email, password } = user;
+        this.setState({ name, email, password, phoneNumber, address, postalCode, gender, imagePath});
+        console.log(this.state.imagePath)
+      }
     }
 
     handleNameChange(evt){
@@ -43,25 +68,44 @@ class ProfilePage extends Component{
         this.setState({dataNasc: evt.target.value});
       }
     
-      handleGender(evt){
+      handleGenderChange(evt){
         this.setState({gender: evt.target.value});
       }
     
-      handleImagePath(evt){
-        this.setState({imagePath: evt.target.value});
+      handleImagePath = (evt) => {
+        this.fileInputRef.click();
+      };
+
+      handleFileInputChange = (event) => {
+        const file = event.target.files[0];
+        const newImagePath = URL.createObjectURL(file);
+        this.setState({ imagePath: newImagePath });
+      }
+
+      async handleProfileChange(evt){
+        this.setState({ editMode: !this.state.editMode });
       }
 
 
       render(){
         return (
             <>
-            <div className="center" style={{ gridColumn: "1", gridRow: "1", marginTop:"10%"}}>
-            <h1>Perfil</h1>
+            <div className="center-image" style={{ gridColumn: "1", gridRow: "1", marginTop:"10%"}}>
+            <h1>Perfil</h1><br/>
             <img
-                src={"https://hypixel.net/attachments/face-png.2475043/"}
+                src={`http://localhost:5072/images/${this.state.imagePath}`}
                 alt="Profile Icon"
                 className="rounded-circle img-fluid"
-                style={{ width: '150px', height: '150px' }} />
+                style={{ width: '150px', height: '150px', cursor: "pointer"}}
+                onClick={this.handleImagePath}
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  ref={(input) => (this.fileInputRef = input)}
+                  onChange={this.handleFileInputChange}
+                />
             </div>
 
         <Container style={{
@@ -72,89 +116,103 @@ class ProfilePage extends Component{
 
                 <div className="center" style={{ gridColumn: "1", gridRow: "1" }}>
                     <Form.Group controlId="formName">
-                        <Form.Label style={{ float: "left" }}>Nome</Form.Label>
+                        <Form.Label>Nome</Form.Label>
                         <Form.Control
                             style={{ width: "auto" }}
                             type="text"
                             placeholder="Insira o seu nome"
                             name="name"
                             value={this.state.name}
-                            onChange={(evt) => this.handleNameChange(evt)} />
+                            onChange={(evt) => this.handleNameChange(evt)}
+                            disabled={!this.state.editMode}
+                            />
                     </Form.Group>
                 </div>
 
                 <div className="center" style={{ gridColumn: "2", gridRow: "1" }}>
                     <Form.Group controlId="formEmail">
-                        <Form.Label style={{ float: "left" }}>Email</Form.Label>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control
                             style={{ width: "auto" }}
                             type="email"
                             placeholder="Insira o seu email"
                             name="email"
                             value={this.state.email}
-                            onChange={(evt) => this.handleEmailChange(evt)} />
+                            onChange={(evt) => this.handleEmailChange(evt)}
+                            disabled={!this.state.editMode}
+                            />
                     </Form.Group>
                 </div>
 
                 <div className="center" style={{ gridColumn: "1", gridRow: "2" }}>
                     <Form.Group controlId="formPassword">
-                        <Form.Label style={{ float: "left" }}>Palavra-Passe</Form.Label>
+                        <Form.Label>Palavra-Passe</Form.Label>
                         <Form.Control
                             style={{ width: "auto" }}
                             type="password"
                             placeholder="Insira a sua password"
                             name="password"
                             value={this.state.password}
-                            onChange={(evt) => this.handlePasswordChange(evt)} />
+                            onChange={(evt) => this.handlePasswordChange(evt)}
+                            disabled={!this.state.editMode}
+                            />
                     </Form.Group>
                 </div>
 
                 <div className="center" style={{ gridColumn: "2", gridRow: "2" }}>
                     <Form.Group controlId="formPhoneNumber">
-                        <Form.Label style={{ float: "left" }}>Telemóvel</Form.Label>
+                        <Form.Label>Telemóvel</Form.Label>
                         <Form.Control
                             style={{ width: "auto" }}
                             type="text"
                             placeholder="Insira o seu telemóvel"
                             name="phoneNumber"
                             value={this.state.phoneNumber}
-                            onChange={(evt) => this.handlePhoneNumber(evt)} />
+                            onChange={(evt) => this.handlePhoneNumber(evt)}
+                            disabled={!this.state.editMode}
+                            />
                     </Form.Group>
                 </div>
 
                 <div className="center" style={{ gridColumn: "1", gridRow: "3" }}>
                     <Form.Group controlId="formAddress">
-                        <Form.Label style={{ float: "left" }}>Morada</Form.Label>
+                        <Form.Label>Morada</Form.Label>
                         <Form.Control
                             style={{ width: "auto" }}
                             type="text"
                             placeholder="Insira a sua morada"
                             name="address"
                             value={this.state.address}
-                            onChange={(evt) => this.handleAddress(evt)} />
+                            onChange={(evt) => this.handleAddress(evt)}
+                            disabled={!this.state.editMode}
+                            />
                     </Form.Group>
                 </div>
 
                 <div className="center" style={{ gridColumn: "2", gridRow: "3" }}>
                     <Form.Group controlId="formPostalCode">
-                        <Form.Label style={{ float: "left" }}>Código Postal</Form.Label>
+                        <Form.Label>Código Postal</Form.Label>
                         <Form.Control
                             style={{ width: "auto" }}
                             type="text"
                             placeholder="Insira o seu código postal"
                             name="postalCode"
                             value={this.state.postalCode}
-                            onChange={(evt) => this.handlePostalCode(evt)} />
+                            onChange={(evt) => this.handlePostalCode(evt)}
+                            disabled={!this.state.editMode}
+                            />
                     </Form.Group>
                 </div>
 
-                <div className="center" style={{ gridColumn: "1", gridRow: "4" }}>
+                <div style={{ gridColumn: "1", gridRow: "4", justifyContent:"center"}}>
                 <Form.Group controlId="formGender">
-                    <Form.Label style={{float:"left"}}>Género</Form.Label>
+                    <Form.Label></Form.Label>
                     <Form.Select
+                    style={{width:"75%", display:"inline"}}
                     name = "gender"
                     value={this.state.gender}
-                    onChange={(evt) => this.handleGenderChange()}
+                    onChange={(evt) => this.handleGenderChange(evt)}
+                    disabled={!this.state.editMode}
                     >
                     <option value = "" disabled hidden>Género</option>
                     <option value = "M">Masculino</option>
@@ -163,9 +221,12 @@ class ProfilePage extends Component{
                 </Form.Group>
                 </div>
 
-                <div style={{ gridColumn: "2", gridRow: "4", marginTop:"14%"}}>
-                    <Button variant="primary" onClick={() => this.handleRegistration()} block>
-                        Registrar
+                <div style={{ gridColumn: "2", gridRow: "4"}}>
+                    <Button variant="secondary" style={{float:"left", marginLeft:"13%"}} onClick={() => this.handleProfileChange()} block>
+                        Cancelar
+                    </Button>
+                    <Button variant="primary" style={{float:"right", marginRight:"13%"}} onClick={() => this.handleProfileChange()} block>
+                      {this.state.editMode ? "Guardar" : "Alterar"}
                     </Button>
                 </div>
             </Container></>
