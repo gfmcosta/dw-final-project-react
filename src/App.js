@@ -5,6 +5,7 @@ import ProdutosPage from './app/ProdutosPage';
 import LoginPage from './app/LoginPage';
 import RegistrationPage from './app/RegistrationPage';
 import Layout from './app/Layout';
+import ProfilePage from './app/ProfilePage';
 
 const RegistrationLayout = ({ children }) => {
   return (
@@ -19,7 +20,7 @@ function App() {
     <div className="App">
       <Layout/>
       <Routes>
-        <Route index element={<SplashPage/>} />
+        <Route index element={<ProfilePage/>} />
         <Route path="/produtos" element={<ProdutosPage />} />
         <Route path="/login" element={<LoginPage/>} />
         <Route
@@ -30,6 +31,7 @@ function App() {
             </RegistrationLayout>
           }
         />
+        <Route path="/profile" element/>
       </Routes>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
