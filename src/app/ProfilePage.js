@@ -30,7 +30,7 @@ class ProfilePage extends Component{
         method: 'GET',
         redirect: 'follow'
       };
-      let res = await fetch(`http://localhost:5072/API/Profile/${email}`, requestOptions).catch(error => console.log('error', error));
+      let res = await fetch(`https://localhost:7122/API/Profile/${email}`, requestOptions).catch(error => console.log('error', error));
       let result = await res.json();
       if (res.status==200){
         console.log(result)
@@ -38,7 +38,7 @@ class ProfilePage extends Component{
         const { email, password } = user;
         this.setState({ name, email, password, phoneNumber, address, postalCode, gender, imagePath});
         console.log(this.state.imagePath)
-        this.setState({strSource: `http://localhost:5072/images/${this.state.imagePath}`})
+        this.setState({strSource: `https://localhost:7122/images/${this.state.imagePath}`})
       }
     }
 
@@ -86,6 +86,7 @@ class ProfilePage extends Component{
 
         reader.onloadend = () => {
           this.setState({ strSource: reader.result });
+          this.setState({imagePath : reader.result})
           console.log(reader.result)
         };
 
@@ -107,7 +108,7 @@ class ProfilePage extends Component{
           };
           console.log(this.state.name)
 
-          await fetch(`http://localhost:5072/API/updateProfile/${this.state.email}`, {
+          await fetch(`https://localhost:7122/API/updateProfile/${this.state.email}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

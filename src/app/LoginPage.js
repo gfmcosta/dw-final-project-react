@@ -29,7 +29,7 @@ class LoginPage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-        let res = await fetch(`http://localhost:5072/API/Login/${this.state.email}/${this.state.password}`, requestOptions).catch(error => console.log('error', error));;
+        let res = await fetch(`https://localhost:7122/API/Login/${this.state.email}/${this.state.password}`, requestOptions).catch(error => console.log('error', error));;
         let result = await res.json();
         console.log(result);
         if (res.status === 200){
