@@ -15,6 +15,7 @@ class ProfilePage extends Component{
       gender: '',
       imagePath: '',
       storedUser: '',
+      strSource: '',
     }
 
     async componentDidMount(){
@@ -37,6 +38,7 @@ class ProfilePage extends Component{
         const { email, password } = user;
         this.setState({ name, email, password, phoneNumber, address, postalCode, gender, imagePath});
         console.log(this.state.imagePath)
+        this.setState({strSource: `http://localhost:5072/images/${this.state.imagePath}`})
       }
     }
 
@@ -78,11 +80,50 @@ class ProfilePage extends Component{
 
       handleFileInputChange = (event) => {
         const file = event.target.files[0];
-        const newImagePath = URL.createObjectURL(file);
-        this.setState({ imagePath: newImagePath });
+        //const newImagePath = URL.createObjectURL(file);
+        //console.log(newImagePath);
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+          this.setState({ strSource: reader.result });
+          console.log(reader.result)
+        };
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
       }
 
-      async handleProfileChange(evt){
+      async handleProfileChange(){
+        if(this.state.editMode){
+          const data = {
+            name: this.state.name,
+            phoneNumber: this.state.phoneNumber,
+            address: this.state.address,
+            postalCode: this.state.postalCode,
+            //dataNasc: this.state.dataNasc
+            gender: this.state.gender,
+            imagePath:this.state.imagePath
+          };
+          console.log(this.state.name)
+
+          await fetch(`http://localhost:5072/API/updateProfile/${this.state.email}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+            .then(response => response.json())
+            .then(result => {
+              // Handle the response from the API
+              console.log(result);
+            })
+            .catch(error => {
+              // Handle any errors
+              console.error(error);
+            });
+        };
         this.setState({ editMode: !this.state.editMode });
       }
 
@@ -93,7 +134,7 @@ class ProfilePage extends Component{
             <div className="center-image" style={{ gridColumn: "1", gridRow: "1", marginTop:"10%"}}>
             <h1>Perfil</h1><br/>
             <img
-                src={`http://localhost:5072/images/${this.state.imagePath}`}
+                src={this.state.strSource}
                 alt="Profile Icon"
                 className="rounded-circle img-fluid"
                 style={{ width: '150px', height: '150px', cursor: "pointer"}}
