@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
 import "./ProdutosPage.css"
+import { hover } from '@testing-library/user-event/dist/hover';
+import { NavLink } from "react-router-dom";
 class ProdutosPage extends Component {
     state = {
       selectedSeason: '',
@@ -70,6 +72,7 @@ class ProdutosPage extends Component {
           className="my-4"
           onChange={this.handleSeasonChange}
           value={this.state.selectedSeason}
+          style={{marginTop:"5%!important"}}
         >
           <option value="">Todas as Épocas</option>
           <option value="2">Verão</option>
@@ -77,22 +80,28 @@ class ProdutosPage extends Component {
           <option value="3">Outono</option>
         </Form.Select>
 
-        <Row>
+        <div style={{display: "grid", justifyContent:"center",
+                gridTemplateColumns: "0.25fr 0.25fr 0.25fr 0.25fr",
+                gridTemplateRows: "repeat(6, 2fr)", gap: "20px 20px" }}>
           {filteredProducts.map((product) =>(
-            <Col md={4} key={product.id} className="mb-4">
-              <Card className="h-100">
-                <Card.Img variant="top" src={`http://localhost:5072/images/${product.imagePath}`} className="card-image" style={{ width: "150px", height: "50px", objectFit: "cover" }}/>
-                <Card.Body className="d-flex flex-column justify-content-between">
+              <Card className="h-100" style={{}}>
+                <NavLink to={`/product?id=${product.id}`}>
+                  <Card.Img variant="top" /*src={`http://localhost:5072/images/${product.imagePath}`*/ src={`https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic`} 
+                    className="card-image" 
+                    style={{ maxWidth:"fit-content", height: "auto", objectFit: "cover", alignSelf:"center" }}
+                  />
+                </NavLink>
+                <Card.Body className="d-flex flex-column justify-content-between" style={{textAlign:"left"}}>
                   <div>
-                    <Card.Title className="card-title">{product.name}</Card.Title>
+                    <Card.Title className="card-title" style={{font:"message-box", cursor:"pointer"}} >{product.name}</Card.Title>
                     <Card.Text className="card-description">{product.description}</Card.Text>
+                    <Card.Text className="card-price">{product.price}€</Card.Text>
                   </div>
-                  <Button variant="primary" className="align-self-center">Buy</Button>
+                  <Button variant="primary" className="align-self-center" style={{ display: 'none' }}>Comprar</Button>
                 </Card.Body>
               </Card>
-            </Col>
           ))}
-        </Row>
+        </div>
       </Container>
     );
   }
