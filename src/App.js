@@ -5,10 +5,11 @@ import { Route, Routes } from 'react-router-dom';
 import ProdutosPage from './app/ProdutosPage';
 import LoginPage from './app/LoginPage';
 import RegistrationPage from './app/RegistrationPage';
-import Layout from './app/Layout';
+import Header from './app/Header';
 import ProfilePage from './app/ProfilePage';
 import Carrinho from './app/Carrinho';
 import ProductDetails from './app/ProductDetails';
+import Footer from  './app/Footer'
 
 function RegistrationLayout({ children }) {
   return (
@@ -30,7 +31,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Layout handleModalShow={this.handleModalShow} />
+        <Header handleModalShow={this.handleModalShow} />
         <Carrinho
           show={this.state.modalShow}
           onHide={() => this.setState({ modalShow: false })}
@@ -50,6 +51,7 @@ class App extends Component {
           <Route path="/product" element={<ProductDetails/>}/>
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
+        <Footer></Footer>
       </div>
     );
   }

@@ -4,7 +4,7 @@ import { FaShoppingBag, FaUserCircle } from 'react-icons/fa';
 import 'react-pro-sidebar/dist/css/styles.css';
 import "./SplashPage.css"
 
-class Layout extends Component {
+class Header extends Component {
     state = {
         isLoggedIn: false,
         modalShow: false,
@@ -63,4 +63,4 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+export default Header;

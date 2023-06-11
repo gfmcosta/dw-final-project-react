@@ -1,0 +1,15 @@
+.selected {
+    background-color: black!important; /* Choose your desired color */
+    color: white!important; /* Choose your desired color */
+    border-color: black!important;
+  }
+
+.button-size{
+    background-color: transparent!important;
+    border-color: black!important;
+    color: black!important;
+}
+
+.button-size:hover{
+    background-color: #cfcfcf!important;
+}
