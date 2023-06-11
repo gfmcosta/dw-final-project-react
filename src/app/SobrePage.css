@@ -1,0 +1,31 @@
+.images{
+    display: flex;
+    align-self: center;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+h2{
+    font: message-box;
+    font-size: 30px;
+}
+
+.left{
+    text-align: left;
+}
+
+.right{
+    text-align: right;
+}
+
+.main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-content: center;
+}

@@ -10,7 +10,8 @@ class ProductDetails extends Component {
         products: '',
         sizes: ['S', 'M', 'L'],
         selectedSize: '',
-        quantity: ''
+        quantity: '',
+        cartClick: ''
     };
 
     handleQuantity = (e) => {
@@ -26,6 +27,13 @@ class ProductDetails extends Component {
         });
       };
       
+      handleCartClick = () => {
+        this.setState({ cartClick: true });
+      
+        setTimeout(() => {
+          this.setState({ cartClick: false });
+        }, 1000);
+      };
       
 
     async componentDidMount(){
@@ -70,7 +78,7 @@ class ProductDetails extends Component {
                             src="https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic"
                             alt="Product"
                             className="img-fluid"
-                            style={{width:"40%"}}
+                            style={{width:"40%", cursor:"pointer", border:"2px solid black"}}
                             />
                         </div><br/>
                         <Form.Select
@@ -102,7 +110,7 @@ class ProductDetails extends Component {
                             <Button className={this.state.selectedSize == "L" ? 'selected' : 'button-size'} value={this.state.selectedSize} onClick={() => this.handleClick("L")}>L</Button>
                         </div>
                         <br/><br/>
-                        <Button variant="primary" style={{width:"100%"}}><FaShoppingCart className="mr-2" /> Adicionar</Button>
+                        <Button className={this.state.cartClick ? 'add-button-click' : 'add-button'} variant="primary" style={{width:"100%"}} onMouseDown={()=> this.handleCartClick()} onMouseUp={()=> this.handleCartClick()}><FaShoppingCart className="mr-2" />Adicionar</Button>
                     </div>
                 </div>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

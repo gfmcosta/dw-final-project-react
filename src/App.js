@@ -10,6 +10,7 @@ import ProfilePage from './app/ProfilePage';
 import Carrinho from './app/Carrinho';
 import ProductDetails from './app/ProductDetails';
 import Footer from  './app/Footer'
+import SobrePage from './app/SobrePage';
 
 function RegistrationLayout({ children }) {
   return (
@@ -50,6 +51,7 @@ class App extends Component {
           />
           <Route path="/product" element={<ProductDetails/>}/>
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/about" element={<SobrePage/>}/>
         </Routes>
         <Footer></Footer>
       </div>
