@@ -7,6 +7,7 @@ import "./SplashPage.css"
 class Layout extends Component {
     state = {
         isLoggedIn: false,
+        modalShow: false,
     }
     componentDidMount(){
         console.log(JSON.parse(sessionStorage.getItem('user')));
@@ -15,7 +16,7 @@ class Layout extends Component {
         }else{
           this.setState({isLoggedIn: false});
         }
-      }
+    }
     render() {
         return (
             <Navbar bg="light" expand="lg" variant="light" fixed="top">
@@ -47,9 +48,13 @@ class Layout extends Component {
                     <span>Iniciar Sessão</span>
                   </Nav.Link>
                 )}
-                <Nav.Link href="" className="d-flex align-items-center" id="far-right">
-                  <FaShoppingBag className="me-2" />
-                </Nav.Link>
+                { sessionStorage.getItem('user') != null ? (
+                  <Nav.Link onClick={this.props.handleModalShow} className="d-flex align-items-center" id="far-right">
+                    <FaShoppingBag className="me-2" />
+                  </Nav.Link>
+                ):(
+                  null
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>

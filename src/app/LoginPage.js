@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button} from 'react-bootstrap';
 import "./LoginPage.css"
-
+import Carrinho from './Carrinho';
 class LoginPage extends Component {
     state = { 
         email: '',
         password: '',
         user: [],
-        status: 0
+        status: 0,
+        modalShow: false,
     }
-
-
 
     handleEmailChange(evt){
         this.setState({email: evt.target.value});
@@ -29,7 +28,7 @@ class LoginPage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-        let res = await fetch(`https://localhost:7122/API/Login/${this.state.email}/${this.state.password}`, requestOptions).catch(error => console.log('error', error));;
+        let res = await fetch(`http://localhost:5072/API/Login/${this.state.email}/${this.state.password}`, requestOptions).catch(error => console.log('error', error));;
         let result = await res.json();
         console.log(result);
         if (res.status === 200){

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
 import "./ProdutosPage.css"
-
 class ProdutosPage extends Component {
     state = {
       selectedSeason: '',
@@ -39,6 +38,12 @@ class ProdutosPage extends Component {
   };
 
   async componentDidMount(){
+    const searchParams = new URLSearchParams(window.location.search);
+    const s = searchParams.get('season');
+    if(parseInt(s)<5 && parseInt(s)>0 ){
+      this.setState({selectedSeason: s});
+    }
+
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'
@@ -49,6 +54,7 @@ class ProdutosPage extends Component {
       console.log(result.$values);
       this.setState({products: result.$values});
     }
+  
   }
  
 
