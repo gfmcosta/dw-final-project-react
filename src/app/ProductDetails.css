@@ -13,3 +13,15 @@
 .button-size:hover{
     background-color: #cfcfcf!important;
 }
+
+.add-button{
+    background-color: black!important;
+    color: white!important;
+    border-color: black!important;
+}
+
+.add-button-click{
+    background-color: grey!important;
+    color: white!important;
+    border-color: white!important;
+}

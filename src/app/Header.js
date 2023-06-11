@@ -34,8 +34,8 @@ class Header extends Component {
                 <Nav.Link href="produtos" className="text-uppercase">
                   Produtos
                 </Nav.Link>
-                <Nav.Link href="contactos" className="text-uppercase">
-                  Contactos
+                <Nav.Link href="about" className="text-uppercase">
+                  Sobre
                 </Nav.Link>
                 {this.state.isLoggedIn ? (
                   <Nav.Link href="profile" className="d-flex align-items-center">

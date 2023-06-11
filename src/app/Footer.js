@@ -28,44 +28,40 @@ class Footer extends Component {
       return (
         <footer className={`bg-dark text-light ${showFooter ? 'show-footer' : ''}`}>
           <Container style={{height:"auto"}}>
-            <Row>
+            <Row style={{marginTop:"25px"}}>
               <Col md={6}>
-                <h5>About Us</h5>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet tortor quis mattis commodo.
-                  Sed commodo, turpis vitae lacinia pretium, velit velit posuere risus, sit amet hendrerit eros ante sed neque.
-                </p>
+                <h5>Sobre Nós</h5>
+                <p>Projeto realizado no âmbito da cadeira de Desenvolvimento Web, lecionada pelos docentes João Silva e José Casimiro</p>
+                <p>Loja online de Roupa 'Água Salgada'</p>
+                <p>Da autoria de Gonçalo Costa 23692 & João Gonçalves 23882</p>
               </Col>
               <Col md={3}>
                 <h5>Links</h5>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="/">Home</a>
+                    <a href="/">Inicio</a>
                   </li>
                   <li>
-                    <a href="/about">About</a>
-                  </li>
-                  <li>
-                    <a href="/contact">Contact</a>
+                    <a href="/contactos">Contactos</a>
                   </li>
                 </ul>
               </Col>
               <Col md={3}>
-                <h5>Contact Us</h5>
+                <h5>Contacte-nos</h5>
                 <address>
-                  123 Main Street
+                  Rua das Flores Nº32
                   <br />
-                  City, State ZIP
+                  Tomar, 2300-469
                   <br />
-                  Phone: (123) 456-7890
+                  Phone: (351) 911 223 344
                   <br />
-                  Email: info@example.com
+                  Email: support@aguasalgada.pt
                 </address>
               </Col>
             </Row>
             <Row>
               <Col md={12} className="text-center">
-                <p>&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Água Salgada. All rights reserved.</p>
               </Col>
             </Row>
           </Container>
