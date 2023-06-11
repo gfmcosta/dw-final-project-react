@@ -66,7 +66,7 @@ class ProdutosPage extends Component {
       ? this.state.products.filter((product) => product.seasonFK == this.state.selectedSeason)
       : this.state.products;
     return (
-      <Container>
+      <Container className="container">
         <h1 className="text-center mt-5">Product Page</h1>
         <Form.Select
           className="my-4"
@@ -82,13 +82,14 @@ class ProdutosPage extends Component {
 
         <div style={{display: "grid", justifyContent:"center",
                 gridTemplateColumns: "0.25fr 0.25fr 0.25fr 0.25fr",
-                gridTemplateRows: "repeat(6, 2fr)", gap: "20px 20px" }}>
+                gridTemplateRows: "repeat(auto, 2fr)", gap: "20px 20px",
+                marginBottom:"30%"}}>
           {filteredProducts.map((product) =>(
               <Card className="h-100" style={{}}>
                 <NavLink to={`/product?id=${product.id}`}>
                   <Card.Img variant="top" /*src={`http://localhost:5072/images/${product.imagePath}`*/ src={`https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic`} 
                     className="card-image" 
-                    style={{ maxWidth:"fit-content", height: "auto", objectFit: "cover", alignSelf:"center" }}
+                    style={{ maxWidth:"fit-content", height: "auto", objectFit: "cover", alignSelf:"center"}}
                   />
                 </NavLink>
                 <Card.Body className="d-flex flex-column justify-content-between" style={{textAlign:"left"}}>
@@ -102,6 +103,7 @@ class ProdutosPage extends Component {
               </Card>
           ))}
         </div>
+        <br/><br/><br/><br/><br/><br/><br/>
       </Container>
     );
   }
