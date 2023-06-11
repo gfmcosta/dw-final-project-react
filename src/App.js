@@ -8,6 +8,7 @@ import RegistrationPage from './app/RegistrationPage';
 import Layout from './app/Layout';
 import ProfilePage from './app/ProfilePage';
 import Carrinho from './app/Carrinho';
+import ProductDetails from './app/ProductDetails';
 
 function RegistrationLayout({ children }) {
   return (
@@ -46,6 +47,7 @@ class App extends Component {
               </RegistrationLayout>
             }
           />
+          <Route path="/product" element={<ProductDetails/>}/>
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
