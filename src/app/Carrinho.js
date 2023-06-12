@@ -4,7 +4,16 @@ import Modal from 'react-bootstrap/Modal';
 class Carrinho extends Component {
     state = {
         show: this.props.show,
+        shoppingCart : JSON.parse(sessionStorage.getItem('shoppingCart')) || []
     };
+
+    componentDidMount(){
+        setInterval(() => {
+            let shoppingCartAux = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
+            if(this.state.shoppingCart.length !== shoppingCartAux.length){
+                this.setState({shoppingCart: shoppingCartAux});
+            }}, 1000);
+    }
 
     componentDidUpdate(prevProps){
         if (prevProps.show !== this.props.show){
@@ -20,10 +29,15 @@ class Carrinho extends Component {
         this.closeModal();
     };
 
+    handleDeleteButtonClick = () => {
+        sessionStorage.removeItem('shoppingCart');
+        this.setState({shoppingCart: []});
+
+    };
+
 
     render() {
-        const shoppingCart = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
-        const totalPrice = shoppingCart.reduce((acc, item) => acc + item.price * item.chosenQuantity, 0);
+        const totalPrice = this.state.shoppingCart.reduce((acc, item) => acc + item.price * item.chosenQuantity, 0);
         return ( 
             <div>
                 <Modal
@@ -50,7 +64,7 @@ class Carrinho extends Component {
                             <span style={{ display: 'inline-block', width: '80px' }}>Preço</span>
                             </p>
                         </strong>
-                        {shoppingCart.map((item) => (
+                        {this.state.shoppingCart.map((item) => (
                             <p key={item.id}>
                             <span style={{ display: 'inline-block', width: '60px' }}>{item.number}</span>
                             <span style={{ display: 'inline-block', width: '100px' }}>{item.name}</span>
@@ -66,7 +80,7 @@ class Carrinho extends Component {
                         Preço Total: {totalPrice}€
                     </span>
                         <Button onClick={this.props.onHide}>Fechar</Button>
-                        <Button variant="danger" onClick={this.props.onHide}>Limpar Todos</Button>
+                        <Button variant="danger" onClick={ () => this.handleDeleteButtonClick()}>Limpar Todos</Button>
                         <Button variant="success" onClick={this.props.onHide}>Finalizar Compra</Button>
                     </Modal.Footer>
                 </Modal>
