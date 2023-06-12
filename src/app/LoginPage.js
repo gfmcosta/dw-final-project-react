@@ -29,14 +29,19 @@ class LoginPage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
+
         let res = await fetch(`http://localhost:5072/API/Login/${this.state.email}/${this.state.password}`, requestOptions).catch(error => console.log('error', error));;
-        let result = await res.json();
-        console.log(result);
-        if (res.status === 200){
-          sessionStorage.setItem('user', JSON.stringify(result));
-          window.location.href = "/";
+        console.log(res);
+        if(res!==undefined){
+          if (res.status === 200){
+            let result = await res.json();
+            sessionStorage.setItem('user', JSON.stringify(result));
+            window.location.href = "/";
+          }else{
+            this.setState({ showToast: true, toastMessage: 'Credenciais inexistentes', toastType: 'danger' });
+          }
         }else{
-          alert("Email ou password incorretos");
+          this.setState({ showToast: true, toastMessage: 'Sistema indisponível', toastType: 'danger' });
         }
       }
     }

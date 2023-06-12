@@ -17,6 +17,13 @@ class Header extends Component {
           this.setState({isLoggedIn: false});
         }
     }
+
+    handleLogout = () => {
+        sessionStorage.removeItem('user');
+        this.setState({isLoggedIn: false});
+        sessionStorage.removeItem('shoppingCart');
+        window.location.href = "/";
+    }
     render() {
         return (
             <Navbar bg="light" expand="lg" variant="light" fixed="top">
@@ -49,9 +56,14 @@ class Header extends Component {
                   </Nav.Link>
                 )}
                 { sessionStorage.getItem('user') != null ? (
+                  <>
                   <Nav.Link onClick={this.props.handleModalShow} className="d-flex align-items-center" id="far-right">
                     <FaShoppingBag className="me-2" />
                   </Nav.Link>
+                  <Nav.Link className="d-flex align-items-center text-danger" onClick={this.handleLogout}>
+                    Terminar Sessão
+                  </Nav.Link>
+                  </>
                 ):(
                   null
                 )}
