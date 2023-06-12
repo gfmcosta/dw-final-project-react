@@ -31,7 +31,7 @@ class Footer extends Component {
             <Row style={{marginTop:"25px"}}>
               <Col md={6}>
                 <h5>Sobre Nós</h5>
-                <p>Projeto realizado no âmbito da cadeira de Desenvolvimento Web, lecionada pelos docentes João Silva e José Casimiro</p>
+                <p>Projeto realizado no âmbito da unidade curricular de Desenvolvimento Web, lecionada pelos docentes João Silva e José Casimiro Pereira</p>
                 <p>Loja online de Roupa 'Água Salgada'</p>
                 <p>Da autoria de Gonçalo Costa 23692 & João Gonçalves 23882</p>
               </Col>
@@ -42,7 +42,7 @@ class Footer extends Component {
                     <a href="/">Inicio</a>
                   </li>
                   <li>
-                    <a href="/contactos">Contactos</a>
+                    <a href="/about">Sobre nós</a>
                   </li>
                 </ul>
               </Col>

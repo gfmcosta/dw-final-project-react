@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button, Form, Row} from 'react-bootstrap';
+import { Container, Button, Form, Row, InputGroup, FormControl, Toast } from 'react-bootstrap';
 import './ProductDetails.css'
 import { FaShoppingCart } from 'react-icons/fa';
 
@@ -11,7 +11,10 @@ class ProductDetails extends Component {
         sizes: ['S', 'M', 'L'],
         selectedSize: '',
         quantity: '',
-        cartClick: ''
+        cartClick: '',
+        showToast: false,
+        toastMessage: '',
+        toastType: '',
     };
 
     handleQuantity = (e) => {
@@ -29,7 +32,29 @@ class ProductDetails extends Component {
       
       handleCartClick = () => {
         this.setState({ cartClick: true });
-      
+        if(sessionStorage.getItem('user') == null){
+          alert("Inicie sessão para adicionar ao carrinho");
+          window.location.href = "/login";
+        }else if(this.state.selectedSize == ''){
+          this.setState({ showToast: true, toastMessage: 'Selecione um tamanho', toastType: 'warning' });
+        }else if(this.state.quantity == ""){
+          this.setState({ showToast: true, toastMessage: 'Selecione a quantidade', toastType: 'warning' });
+        }else{
+        const productList = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
+        const updatedProduct = {
+          ...this.state.products,
+          size: this.state.selectedSize,
+          chosenQuantity: this.state.quantity,
+          number: productList.length + 1,
+        };
+
+        // Append the new product to the list
+        productList.push(updatedProduct);
+
+        // Update the session storage with the updated list
+        sessionStorage.setItem('shoppingCart', JSON.stringify(productList));
+        this.setState({ showToast: true, toastMessage: 'Produto adicionado ao carrinho', toastType: 'success' });
+      }
         setTimeout(() => {
           this.setState({ cartClick: false });
         }, 1000);
@@ -43,7 +68,6 @@ class ProductDetails extends Component {
           this.setState({id: s});
           console.log(s);
         }
-    
         var requestOptions = {
           method: 'GET',
           redirect: 'follow'
@@ -81,25 +105,16 @@ class ProductDetails extends Component {
                             style={{width:"40%", cursor:"pointer", border:"2px solid black"}}
                             />
                         </div><br/>
-                        <Form.Select
-                            className="my-4"
-                            onChange={this.handleQuantity}
+                        <InputGroup className="my-4">
+                          <FormControl
+                            type="number"
+                            min={1}
+                            max={this.state.products.quantity}
                             value={this.state.quantity}
-                            style={{marginTop:"5%!important", width:"33%"}}
-                            >
-                            <option value="">Quantidade</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-
-                        </Form.Select>
+                            onChange={this.handleQuantity}
+                          />
+                          <InputGroup.Text>Quantidade</InputGroup.Text>
+                        </InputGroup>
                         <p>Tamanhos</p>
                         <div style={{display: "grid", justifyContent:"center",
                             gridTemplateColumns: "1fr 1fr 1fr",
@@ -110,7 +125,15 @@ class ProductDetails extends Component {
                             <Button className={this.state.selectedSize == "L" ? 'selected' : 'button-size'} value={this.state.selectedSize} onClick={() => this.handleClick("L")}>L</Button>
                         </div>
                         <br/><br/>
-                        <Button className={this.state.cartClick ? 'add-button-click' : 'add-button'} variant="primary" style={{width:"100%"}} onMouseDown={()=> this.handleCartClick()} onMouseUp={()=> this.handleCartClick()}><FaShoppingCart className="mr-2" />Adicionar</Button>
+                        <Button className={this.state.cartClick ? 'add-button-click' : 'add-button'} variant="primary" style={{width:"100%"}} onMouseDown={()=> this.handleCartClick()}><FaShoppingCart className="mr-2" />Adicionar</Button>
+                        <Toast show={this.state.showToast} onClose={() => this.setState({showToast:false})} delay={5000} autohide   style={{ position: 'fixed', top: '18%', right: '20px' }} bg={this.state.toastType}>
+                          <Toast.Header>
+                            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                            <strong className="me-auto">Sistema</strong>
+                            <small>Há 1 segundo atrás</small>
+                          </Toast.Header>
+                          <Toast.Body>{this.state.toastMessage}</Toast.Body>
+                        </Toast>
                     </div>
                 </div>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Toast} from 'react-bootstrap';
 import "./LoginPage.css"
-import Carrinho from './Carrinho';
 class LoginPage extends Component {
     state = { 
         email: '',
@@ -9,6 +8,9 @@ class LoginPage extends Component {
         user: [],
         status: 0,
         modalShow: false,
+        showToast: false,
+        toastMessage: '',
+        toastType: '',
     }
 
     handleEmailChange(evt){
@@ -21,8 +23,7 @@ class LoginPage extends Component {
 
     async handleLogin(){
       if(this.state.email === '' || this.state.password === ''){
-        alert("Preencha todos os campos");
-        
+        this.setState({ showToast: true, toastMessage: 'Preencha todos os campos', toastType: 'warning' });        
       }else{
         var requestOptions = {
           method: 'GET',
@@ -73,6 +74,14 @@ class LoginPage extends Component {
                   </Col>
                 </Row>
               </Container>
+              <Toast show={this.state.showToast} onClose={() => this.setState({showToast:false})} delay={5000} autohide   style={{ position: 'fixed', top: '18%', right: '20px' }} bg={this.state.toastType}>
+                          <Toast.Header>
+                            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                            <strong className="me-auto">Sistema</strong>
+                            <small>Há 1 segundo atrás</small>
+                          </Toast.Header>
+                          <Toast.Body>{this.state.toastMessage}</Toast.Body>
+                        </Toast>
             </div>
         );
     }

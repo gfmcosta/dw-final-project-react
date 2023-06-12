@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Toast } from 'react-bootstrap';
 import "./ProfilePage.css"
 
 class ProfilePage extends Component{
@@ -16,6 +16,9 @@ class ProfilePage extends Component{
       imagePath: '',
       storedUser: '',
       strSource: '',
+      showToast: false,
+      toastMessage: '',
+      toastType: '',
     }
 
     async componentDidMount(){
@@ -115,14 +118,17 @@ class ProfilePage extends Component{
             },
             body: JSON.stringify(data)
           })
-            .then(response => response.json())
-            .then(result => {
-              // Handle the response from the API
-              console.log(result);
-            })
+            .then(response => {
+              if(response.status === 200){
+                this.setState({ showToast: true, toastMessage: 'Perfil alterado com sucesso', toastType: 'success' });
+              }else{
+                this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao alterar o perfil', toastType: 'danger' });
+              }
+              response.json()})
             .catch(error => {
               // Handle any errors
               console.error(error);
+              this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao alterar o perfil', toastType: 'danger' });
             });
         };
         this.setState({ editMode: !this.state.editMode });
@@ -270,6 +276,14 @@ class ProfilePage extends Component{
                     <Button variant="primary" style={{float:"right", marginRight:"13%"}} onClick={() => this.handleProfileChange()} block>
                       {this.state.editMode ? "Guardar" : "Alterar"}
                     </Button>
+                    <Toast show={this.state.showToast} onClose={() => this.setState({showToast:false})} delay={5000} autohide   style={{ position: 'fixed', top: '18%', right: '20px' }} bg={this.state.toastType}>
+                          <Toast.Header>
+                            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                            <strong className="me-auto">Sistema</strong>
+                            <small>Há 1 segundo atrás</small>
+                          </Toast.Header>
+                          <Toast.Body>{this.state.toastMessage}</Toast.Body>
+                    </Toast>
                 </div>
             </Container></>
         );

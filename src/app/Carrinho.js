@@ -16,18 +16,14 @@ class Carrinho extends Component {
         this.setState({show: false})
     };
 
-    handleKeyDown = (event) => {
-        if (event.keyCode === 27) {
-            this.closeModal();
-        }
-    };
-
     handlecloseButtonClick = () => {
         this.closeModal();
     };
 
 
-    render() { 
+    render() {
+        const shoppingCart = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
+        const totalPrice = shoppingCart.reduce((acc, item) => acc + item.price * item.chosenQuantity, 0);
         return ( 
             <div>
                 <Modal
@@ -44,15 +40,34 @@ class Carrinho extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h4>Lista de produtos</h4>
-                        <p>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                        consectetur ac, vestibulum at eros.
-                        </p>
+                    <h4>Lista de produtos</h4>
+                        <strong>
+                            <p key={999}>
+                            <span style={{ display: 'inline-block', width: '60px' }}>Nº</span>
+                            <span style={{ display: 'inline-block', width: '100px' }}>Nome</span>
+                            <span style={{ display: 'inline-block', width: '80px' }}>Tamanho</span>
+                            <span style={{ display: 'inline-block', width: '100px' }}>Quantidade</span>
+                            <span style={{ display: 'inline-block', width: '80px' }}>Preço</span>
+                            </p>
+                        </strong>
+                        {shoppingCart.map((item) => (
+                            <p key={item.id}>
+                            <span style={{ display: 'inline-block', width: '60px' }}>{item.number}</span>
+                            <span style={{ display: 'inline-block', width: '100px' }}>{item.name}</span>
+                            <span style={{ display: 'inline-block', width: '80px' }}>{item.size}</span>
+                            <span style={{ display: 'inline-block', width: '100px' }}>{item.chosenQuantity}</span>
+                            <span style={{ display: 'inline-block', width: '80px' }}>{item.price * item.chosenQuantity}€</span>
+                            </p>
+                        ))}
                     </Modal.Body>
+
                     <Modal.Footer>
-                        <Button onClick={this.props.onHide}>Close</Button>
+                    <span style={{ marginRight: 'auto', fontWeight: 'bold', fontSize: '20px' }}>
+                        Preço Total: {totalPrice}€
+                    </span>
+                        <Button onClick={this.props.onHide}>Fechar</Button>
+                        <Button variant="danger" onClick={this.props.onHide}>Limpar Todos</Button>
+                        <Button variant="success" onClick={this.props.onHide}>Finalizar Compra</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
