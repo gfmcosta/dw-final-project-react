@@ -39,6 +39,8 @@ class ProductDetails extends Component {
           this.setState({ showToast: true, toastMessage: 'Selecione um tamanho', toastType: 'warning' });
         }else if(this.state.quantity == ""){
           this.setState({ showToast: true, toastMessage: 'Selecione a quantidade', toastType: 'warning' });
+        }else if(this.state.quantity>this.state.products.quantity){
+          this.setState({ showToast: true, toastMessage: 'Quantidade indisponível', toastType: 'warning' });
         }else{
         const productList = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
         const updatedProduct = {
