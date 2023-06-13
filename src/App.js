@@ -13,6 +13,11 @@ import Footer from  './app/Footer'
 import SobrePage from './app/SobrePage';
 import AdminPage from './app/AdminPage'
 import AdminCategoryPage from './app/AdminCategoryPage'
+import AdminPersonPage from './app/AdminPersonPage'
+import AdminOrderPage from './app/AdminOrderPage'
+import AdminOrderItemPage from './app/AdminOrderItemPage'
+import AdminProductPage from './app/AdminProductPage'
+import AdminSeasonPage from './app/AdminSeasonPage'
 
 function RegistrationLayout({ children }) {
   return (
@@ -56,6 +61,11 @@ class App extends Component {
           <Route path="/about" element={<SobrePage/>}/>
           <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/admin/category" element={<AdminCategoryPage/>}/>
+          <Route path="/admin/person" element={<AdminPersonPage/>}/>
+          <Route path="/admin/order" element={<AdminOrderPage/>}/>
+          <Route path="/admin/orderitem" element={<AdminOrderItemPage/>}/>
+          <Route path="/admin/product" element={<AdminProductPage/>}/>
+          <Route path="/admin/productseason" element={<AdminSeasonPage/>}/>
         </Routes>
         <Footer></Footer>
       </div>
