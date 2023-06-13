@@ -10,6 +10,8 @@ class SplashPage extends Component {
   };
 
   componentDidMount(){
+    const encodedPassword = encodeURIComponent("123Qwe#")
+    console.log(encodedPassword);
     console.log(JSON.parse(sessionStorage.getItem('user')));
     if (JSON.parse(sessionStorage.getItem('user'))!= null){
       this.setState({isLoggedIn: true});
@@ -43,8 +45,3 @@ class SplashPage extends Component {
 }
 
 export default SplashPage;
-
-
-//https://wallpapers.com/images/hd/costa-rica-1000-x-1333-picture-wrksj1hivjprcj6d.jpg"
-//https://images.unsplash.com/photo-1501426026826-31c667bdf23d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3VtbWVyJTIwZnVufGVufDB8fDB8fA%3D%3D&w=1000&q=80
-//https://cdn.wallpapersafari.com/18/83/xk9Y7W.jpg
