@@ -7,22 +7,22 @@ const SubHeader = () => {
             <Container style={{height:"30px"}}>
                 <Navbar.Collapse id="basic-navbar-nav" style={{marginTop:"-25px"}}>
                     <Nav className="ms-auto">
-                        <Nav.Link href="admin/category" className="text-uppercase" style={{color:"white"}}>
+                        <Nav.Link href="/admin/category" className="text-uppercase" style={{color:"white"}}>
                             Categorias
                         </Nav.Link>
-                        <Nav.Link href="admin/order" className="text-uppercase" style={{color:"white"}}>
+                        <Nav.Link href="/admin/order" className="text-uppercase" style={{color:"white"}}>
                             Pedidos
                         </Nav.Link>
-                        <Nav.Link href="admin/orderitem" className="text-uppercase" style={{color:"white"}}>
+                        <Nav.Link href="/admin/orderitem" className="text-uppercase" style={{color:"white"}}>
                             Artigos nos Pedidos
                         </Nav.Link>
-                        <Nav.Link href="admin/person" className="text-uppercase" style={{color:"white"}}>
+                        <Nav.Link href="/admin/person" className="text-uppercase" style={{color:"white"}}>
                             Pessoas
                         </Nav.Link>
-                        <Nav.Link href="admin/product" className="text-uppercase" style={{color:"white"}}>
+                        <Nav.Link href="/admin/product" className="text-uppercase" style={{color:"white"}}>
                             Produtos
                         </Nav.Link>
-                        <Nav.Link href="admin/productseason" className="text-uppercase" style={{color:"white"}}>
+                        <Nav.Link href="/admin/productseason" className="text-uppercase" style={{color:"white"}}>
                             Épocas
                         </Nav.Link>
                     </Nav>

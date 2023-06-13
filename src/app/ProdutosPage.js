@@ -54,7 +54,7 @@ class ProdutosPage extends Component {
     let result = await res.json();
     if (res.status === 200){
       console.log(result.$values);
-      this.setState({products: result.$values});
+      this.setState({products: result});
     }
   
   }
