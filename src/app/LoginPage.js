@@ -29,8 +29,8 @@ class LoginPage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-
-        let res = await fetch(`http://localhost:5072/API/Login/${this.state.email}/${this.state.password}`, requestOptions).catch(error => console.log('error', error));;
+        const encodedPassword = encodeURIComponent(this.state.password);
+        let res = await fetch(`http://localhost:5072/API/Login/${this.state.email}/${encodedPassword}`, requestOptions).catch(error => console.log('error', error));;
         console.log(res);
         if(res!==undefined){
           if (res.status === 200){

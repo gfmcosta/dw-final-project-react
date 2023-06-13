@@ -53,38 +53,41 @@ class Carrinho extends Component {
                         Carrinho de Compras
                         </Modal.Title>
                     </Modal.Header>
+                    {this.state.shoppingCart.length > 0 ? (
                     <Modal.Body>
-                    <h4>Lista de produtos</h4>
+                        <h4>Lista de produtos</h4>
                         <strong>
                             <p key={999}>
-                            <span style={{ display: 'inline-block', width: '60px' }}>Nº</span>
-                            <span style={{ display: 'inline-block', width: '100px' }}>Nome</span>
-                            <span style={{ display: 'inline-block', width: '80px' }}>Tamanho</span>
-                            <span style={{ display: 'inline-block', width: '100px' }}>Quantidade</span>
-                            <span style={{ display: 'inline-block', width: '80px' }}>Preço</span>
+                                <span style={{ display: 'inline-block', width: '60px', marginLeft:"10%"}}>Nº</span>
+                                <span style={{ display: 'inline-block', width: '100px' }}>Nome</span>
+                                <span style={{ display: 'inline-block', width: '80px' }}>Tamanho</span>
+                                <span style={{ display: 'inline-block', width: '100px' }}>Quantidade</span>
+                                <span style={{ display: 'inline-block', width: '80px' }}>Preço</span>
                             </p>
                         </strong>
                         {this.state.shoppingCart.map((item) => (
-                            <p key={item.id}>
-                            <span style={{ display: 'inline-block', width: '60px' }}>{item.number}</span>
-                            <span style={{ display: 'inline-block', width: '100px' }}>{item.name}</span>
-                            <span style={{ display: 'inline-block', width: '80px' }}>{item.size}</span>
-                            <span style={{ display: 'inline-block', width: '100px' }}>{item.chosenQuantity}</span>
-                            <span style={{ display: 'inline-block', width: '80px' }}>{item.price * item.chosenQuantity}€</span>
+                            <p key={item.id} style={{height:"80px"}}>
+                                <img src={/*`http://localhost:5072/images/${item.imagePath}`*/`https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic`} style={{width:"8%"}}></img>
+                                <span style={{ display: 'inline-block', width: '60px', marginLeft:"2%"}}>{item.number}</span>
+                                <span style={{ display: 'inline-block', width: '100px' }}>{item.name}</span>
+                                <span style={{ display: 'inline-block', width: '80px' }}>{item.size}</span>
+                                <span style={{ display: 'inline-block', width: '100px' }}>{item.chosenQuantity}</span>
+                                <span style={{ display: 'inline-block', width: '80px' }}>{item.price * item.chosenQuantity}€</span>
                             </p>
                         ))}
-                    </Modal.Body>
+                        </Modal.Body>
+                    ) : (<Modal.Body><p>Sem Artigos</p></Modal.Body>)}
 
-                    <Modal.Footer>
+                <Modal.Footer>
                     <span style={{ marginRight: 'auto', fontWeight: 'bold', fontSize: '20px' }}>
                         Preço Total: {totalPrice}€
                     </span>
-                        <Button onClick={this.props.onHide}>Fechar</Button>
-                        <Button variant="danger" onClick={ () => this.handleDeleteButtonClick()}>Limpar Todos</Button>
-                        <Button variant="success" onClick={this.props.onHide}>Finalizar Compra</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
+                    <Button onClick={this.props.onHide}>Fechar</Button>
+                    <Button variant="danger" onClick={() => this.handleDeleteButtonClick()}>Limpar Todos</Button>
+                    <Button variant="success" onClick={this.props.onHide}>Finalizar Compra</Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
          );
     }
 }

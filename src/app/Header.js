@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
-import { FaShoppingBag, FaUserCircle } from 'react-icons/fa';
+import { FaShoppingBag, FaUserCircle, FaKey} from 'react-icons/fa';
 import 'react-pro-sidebar/dist/css/styles.css';
 import "./SplashPage.css"
 
@@ -38,19 +38,20 @@ class Header extends Component {
                 <Nav.Link href="/" className="text-uppercase">
                   Inicio
                 </Nav.Link>
-                <Nav.Link href="produtos" className="text-uppercase">
+                <Nav.Link href="/produtos" className="text-uppercase">
                   Produtos
                 </Nav.Link>
-                <Nav.Link href="about" className="text-uppercase">
+                <Nav.Link href="/about" className="text-uppercase">
                   Sobre
                 </Nav.Link>
                 {this.state.isLoggedIn ? (
-                  <Nav.Link href="profile" className="d-flex align-items-center">
+                  <Nav.Link href="/profile" className="d-flex align-items-center">
                     <FaUserCircle className="me-2" />
                     <span>Perfil</span>
                   </Nav.Link>
+                  
                 ) : (
-                  <Nav.Link href="login" className="d-flex align-items-center">
+                  <Nav.Link href="/login" className="d-flex align-items-center">
                     <FaUserCircle className="me-2" />
                     <span>Iniciar Sessão</span>
                   </Nav.Link>
@@ -62,6 +63,10 @@ class Header extends Component {
                   </Nav.Link>
                   <Nav.Link className="d-flex align-items-center text-danger" onClick={this.handleLogout}>
                     Terminar Sessão
+                  </Nav.Link>
+                  <Nav.Link href="/admin" className="d-flex align-items-center">
+                    <FaKey className="me-2" />
+                    <span>Admin</span>
                   </Nav.Link>
                   </>
                 ):(

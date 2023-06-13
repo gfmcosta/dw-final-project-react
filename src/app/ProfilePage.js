@@ -4,6 +4,7 @@ import "./ProfilePage.css"
 
 class ProfilePage extends Component{
     state={
+      id: 0,
       editMode: false,
       name: '',
       email: '',
@@ -25,15 +26,16 @@ class ProfilePage extends Component{
       //this.setState({ storedUser: sessionStorage.getItem('user') });
       //this.setState({ email: this.state.storedUser.email });
       const storedUser = sessionStorage.getItem('user');
+      console.log(storedUser);
       const user = JSON.parse(storedUser)
-      const email = user.email;
-      console.log(email);
+      this.setState({id: user.person.id});
+      console.log(user.person.id);
       
       var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
-      let res = await fetch(`http://localhost:5072/API/Profile/${email}`, requestOptions).catch(error => console.log('error', error));
+      let res = await fetch(`http://localhost:5072/API/Profile/${user.person.id}`, requestOptions).catch(error => console.log('error', error));
       let result = await res.json();
       if (res.status==200){
         console.log(result)
@@ -111,7 +113,7 @@ class ProfilePage extends Component{
           };
           console.log(this.state.name)
 
-          await fetch(`http://localhost:5072/API/updateProfile/${this.state.email}`, {
+          await fetch(`http://localhost:5072/API/updateProfile/${this.state.id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -162,7 +164,7 @@ class ProfilePage extends Component{
                 gridTemplateRows: "repeat(6, 0.1fr)",
             }}>
 
-                <div className="center" style={{ gridColumn: "1", gridRow: "1" }}>
+                <div className="center" >
                     <Form.Group controlId="formName">
                         <Form.Label>Nome</Form.Label>
                         <Form.Control
@@ -177,37 +179,7 @@ class ProfilePage extends Component{
                     </Form.Group>
                 </div>
 
-                <div className="center" style={{ gridColumn: "2", gridRow: "1" }}>
-                    <Form.Group controlId="formEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            style={{ width: "auto" }}
-                            type="email"
-                            placeholder="Insira o seu email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={(evt) => this.handleEmailChange(evt)}
-                            disabled={!this.state.editMode}
-                            />
-                    </Form.Group>
-                </div>
-
-                <div className="center" style={{ gridColumn: "1", gridRow: "2" }}>
-                    <Form.Group controlId="formPassword">
-                        <Form.Label>Palavra-Passe</Form.Label>
-                        <Form.Control
-                            style={{ width: "auto" }}
-                            type="password"
-                            placeholder="Insira a sua password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={(evt) => this.handlePasswordChange(evt)}
-                            disabled={!this.state.editMode}
-                            />
-                    </Form.Group>
-                </div>
-
-                <div className="center" style={{ gridColumn: "2", gridRow: "2" }}>
+                <div className="center" >
                     <Form.Group controlId="formPhoneNumber">
                         <Form.Label>Telemóvel</Form.Label>
                         <Form.Control
@@ -222,7 +194,7 @@ class ProfilePage extends Component{
                     </Form.Group>
                 </div>
 
-                <div className="center" style={{ gridColumn: "1", gridRow: "3" }}>
+                <div className="center" >
                     <Form.Group controlId="formAddress">
                         <Form.Label>Morada</Form.Label>
                         <Form.Control
@@ -237,7 +209,7 @@ class ProfilePage extends Component{
                     </Form.Group>
                 </div>
 
-                <div className="center" style={{ gridColumn: "2", gridRow: "3" }}>
+                <div className="center" >
                     <Form.Group controlId="formPostalCode">
                         <Form.Label>Código Postal</Form.Label>
                         <Form.Control
@@ -252,7 +224,7 @@ class ProfilePage extends Component{
                     </Form.Group>
                 </div>
 
-                <div style={{ gridColumn: "1", gridRow: "4", justifyContent:"center"}}>
+                <div style={{justifyContent:"center"}}>
                 <Form.Group controlId="formGender">
                     <Form.Label></Form.Label>
                     <Form.Select
@@ -269,7 +241,7 @@ class ProfilePage extends Component{
                 </Form.Group>
                 </div>
 
-                <div style={{ gridColumn: "2", gridRow: "4"}}>
+                <div >
                     <Button variant="secondary" style={{float:"left", marginLeft:"13%"}} onClick={() => window.location.href="/"} block>
                         Cancelar
                     </Button>
