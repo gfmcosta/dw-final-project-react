@@ -40,10 +40,10 @@ class Carrinho extends Component {
     async handleOrderButtonClick(){
 
         const storedPerson = sessionStorage.getItem('user');
-        const person = JSON.parse(storedPerson)
-        this.setState({personId: person.person.id});
+        const user = JSON.parse(storedPerson)
+        this.setState({personId: user.person.id});
 
-        await fetch(`http://localhost:5072/API/orders/${person.person.id}`, {
+        await fetch(`http://localhost:5072/API/orders/${user.person.id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
