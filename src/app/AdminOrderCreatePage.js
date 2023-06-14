@@ -3,6 +3,22 @@ import SubHeader from './SubHeader';
 
 class AdminOrderCreatePage extends Component {
 
+    state={
+        users: []
+    }
+
+    async componentDidMount(){
+        var requestOptions = {
+          method: 'GET',
+          redirect: 'follow'
+        };
+        let res = await fetch(`http://localhost:5072/API/Person`, requestOptions).catch(error => console.log('error', error));
+        let result = await res.json();
+        if (res.status==200){
+          this.setState({users: result});
+        }
+      }
+
     render(){
         return (
             <div>
@@ -17,7 +33,12 @@ class AdminOrderCreatePage extends Component {
                                 
                                 <div class="form-group">
                                     <label class="control-label" for="description">PersonFK</label>
-                                    <select class="form-control" data-val="true" data-val-required="The personFK field is required." id="personFK" name="personFK"><option value="4"></option></select>
+                                    <select class="form-control" data-val="true" data-val-required="The personFK field is required." id="personFK" name="personFK">
+                                        {this.state.users.map((persons) => (
+                                        <option value="4">
+                                            {persons.name}
+                                        </option>))}
+                                    </select>
                                     <span class="text-danger field-validation-valid" data-valmsg-for="description" data-valmsg-replace="true"></span>
                                 </div>
                                 <br/>

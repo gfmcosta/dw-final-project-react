@@ -3,6 +3,26 @@ import SubHeader from './SubHeader';
 
 class AdminOrderItemCreatePage extends Component {
 
+    state={
+        orders: [],
+        produtos: []
+    }
+
+    async componentDidMount(){
+        var requestOptions = {
+          method: 'GET',
+          redirect: 'follow'
+        };
+        let res = await fetch(`http://localhost:5072/API/order`, requestOptions).catch(error => console.log('error', error));
+        let res2 = await fetch(`http://localhost:5072/API/products`, requestOptions).catch(error => console.log('error', error));
+        let result = await res.json();
+        let result2 = await res2.json();
+        if (res.status==200){
+          this.setState({orders: result});
+          this.setState({produtos: result2});
+        }
+      }
+
     render(){
         return (
             <div>
@@ -19,7 +39,9 @@ class AdminOrderItemCreatePage extends Component {
                                 <div class="form-group">
                                     <label class="control-label" for="size">Tamanho</label>
                                     <select class="form-control" data-val="true" data-val-regex="O Tamanho deve ter apenas um caracter." data-val-regex-pattern="[SML]{1}" data-val-required="O Tamanho é de preenchimento obrigatório" id="size" name="size">
-
+                                        <option>S</option>
+                                        <option>M</option>
+                                        <option>L</option>
                                     </select>
                                     <span class="text-danger field-validation-valid" data-valmsg-for="size" data-valmsg-replace="true"></span>
                                 </div>
@@ -30,19 +52,21 @@ class AdminOrderItemCreatePage extends Component {
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="orderFK">orderFK</label>
-                                    <select class="form-control" data-val="true" data-val-required="The orderFK field is required." id="orderFK" name="orderFK"><option value="1">
-
-                                    </option>
-
-                                        </select>
+                                    <select class="form-control" data-val="true" data-val-required="The orderFK field is required." id="orderFK" name="orderFK">
+                                        {this.state.orders.map((fks) => (
+                                        <option value="1">
+                                            {fks.id}
+                                        </option>))}
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="productFK">productFK</label>
-                                    <select class="form-control" data-val="true" data-val-required="The productFK field is required." id="productFK" name="productFK"><option value="1">
-
-                                    </option>
-
-                                        </select>
+                                    <select class="form-control" data-val="true" data-val-required="The productFK field is required." id="productFK" name="productFK">
+                                        {this.state.produtos.map((prods) => (
+                                        <option value="1">
+                                            {prods.description}
+                                        </option>))}
+                                    </select>
                                 </div>
                                 <br/>
                                 <div class="form-group">

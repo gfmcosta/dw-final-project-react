@@ -27,7 +27,7 @@ class AdminSeasonPage extends Component {
             <div style={{marginTop:"200px", width:"70%", left:"50%", transform:"translate(-50%)", position:"absolute", textAlign:"left"}}>
                 <h1>Index</h1>
                 <p>
-                    <a href="/Category/Create">Create New</a>
+                    <a href="/admin/productseason/Create">Create New</a>
                 </p>
                 <table class="table">
                     <thead>
