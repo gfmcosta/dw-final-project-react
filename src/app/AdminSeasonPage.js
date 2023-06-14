@@ -12,7 +12,7 @@ class AdminSeasonPage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-        let res = await fetch(`http://localhost:5072/API/Order`, requestOptions).catch(error => console.log('error', error));;
+        let res = await fetch(`http://localhost:5072/API/productseason`, requestOptions).catch(error => console.log('error', error));;
         let result = await res.json();
         if (res.status === 200){
           console.log(result);

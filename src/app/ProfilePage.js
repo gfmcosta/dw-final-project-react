@@ -241,7 +241,7 @@ class ProfilePage extends Component{
                 </Form.Group>
                 </div>
 
-                <div >
+                <div>
                     <Button variant="secondary" style={{float:"left", marginLeft:"13%"}} onClick={() => window.location.href="/"} block>
                         Cancelar
                     </Button>
