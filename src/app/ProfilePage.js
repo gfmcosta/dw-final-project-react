@@ -31,6 +31,7 @@ class ProfilePage extends Component{
       this.setState({id: user.person.id});
       console.log(user.person.id);
       
+      
       var requestOptions = {
         method: 'GET',
         redirect: 'follow'
