@@ -20,6 +20,7 @@ class AdminProductPage extends Component {
         }
     }
 
+    
     render(){
         return (
             <div>
