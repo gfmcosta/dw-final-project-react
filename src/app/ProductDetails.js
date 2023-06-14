@@ -44,18 +44,22 @@ class ProductDetails extends Component {
         }else{
         const productList = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
         const updatedProduct = {
-          ...this.state.products,
+          productFK: this.state.products.id,
+          quantity: this.state.quantity,
+          totalPrice: this.state.products.price * this.state.quantity,
           size: this.state.selectedSize,
-          chosenQuantity: this.state.quantity,
           number: productList.length + 1,
+          name: this.state.products.name,
         };
+                // Append the new product to the list
+                productList.push(updatedProduct);
 
-        // Append the new product to the list
-        productList.push(updatedProduct);
-
-        // Update the session storage with the updated list
-        sessionStorage.setItem('shoppingCart', JSON.stringify(productList));
-        this.setState({ showToast: true, toastMessage: 'Produto adicionado ao carrinho', toastType: 'success' });
+                // Update the session storage with the updated list
+                sessionStorage.setItem('shoppingCart', JSON.stringify(productList));
+                this.setState({ showToast: true, toastMessage: 'Produto adicionado ao carrinho', toastType: 'success' });
+            
+          
+        
       }
         setTimeout(() => {
           this.setState({ cartClick: false });

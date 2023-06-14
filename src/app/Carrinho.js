@@ -38,23 +38,36 @@ class Carrinho extends Component {
     };
 
     async handleOrderButtonClick(){
-
+        
         const storedPerson = sessionStorage.getItem('user');
         const user = JSON.parse(storedPerson)
         this.setState({personId: user.person.id});
-
+        console.log(this.state.personId)
         await fetch(`http://localhost:5072/API/orders/${user.person.id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.state.shoppingCart)
-          })
+          }).then(response => {
+            if(response.status === 200){
+                alert("Compra realizada com sucesso");
+                this.handleDeleteButtonClick();
+                window.location.href = "/";
+            }else{
+                alert("Ocorreu um erro ao realizar a sua compra");
+                        }
+            response.json()})
+          .catch(error => {
+            // Handle any errors
+            console.error(error);
+            alert("Ocorreu um erro ao realizar a sua compra");
+          });
     }
 
 
     render() {
-        const totalPrice = this.state.shoppingCart.reduce((acc, item) => acc + item.price * item.chosenQuantity, 0);
+        const totalPrice = this.state.shoppingCart.reduce((acc, item) => acc + item.totalPrice, 0);
         return ( 
             <div>
                 <Modal
@@ -88,8 +101,8 @@ class Carrinho extends Component {
                                 <span style={{ display: 'inline-block', width: '60px', marginLeft:"2%"}}>{item.number}</span>
                                 <span style={{ display: 'inline-block', width: '100px' }}>{item.name}</span>
                                 <span style={{ display: 'inline-block', width: '80px' }}>{item.size}</span>
-                                <span style={{ display: 'inline-block', width: '100px' }}>{item.chosenQuantity}</span>
-                                <span style={{ display: 'inline-block', width: '80px' }}>{item.price * item.chosenQuantity}€</span>
+                                <span style={{ display: 'inline-block', width: '100px' }}>{item.quantity}</span>
+                                <span style={{ display: 'inline-block', width: '80px' }}>{item.totalPrice}€</span>
                             </p>
                         ))}
                         </Modal.Body>
@@ -104,6 +117,7 @@ class Carrinho extends Component {
                     <Button variant="success" onClick={() => this.handleOrderButtonClick()}>Finalizar Compra</Button>
                 </Modal.Footer>
             </Modal>
+            
         </div>
          );
     }
