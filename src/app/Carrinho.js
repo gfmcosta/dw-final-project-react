@@ -4,10 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 class Carrinho extends Component {
     state = {
         show: this.props.show,
-        shoppingCart : JSON.parse(sessionStorage.getItem('shoppingCart')) || []
+        shoppingCart : JSON.parse(sessionStorage.getItem('shoppingCart')) || [],
+        personId : ''
     };
 
     componentDidMount(){
+
         setInterval(() => {
             let shoppingCartAux = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
             if(this.state.shoppingCart.length !== shoppingCartAux.length){
@@ -34,6 +36,21 @@ class Carrinho extends Component {
         this.setState({shoppingCart: []});
 
     };
+
+    async handleOrderButtonClick(){
+
+        const storedPerson = sessionStorage.getItem('user');
+        const person = JSON.parse(storedPerson)
+        this.setState({personId: person.person.id});
+
+        await fetch(`http://localhost:5072/API/orders/${person.person.id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state.shoppingCart)
+          })
+    }
 
 
     render() {
@@ -84,7 +101,7 @@ class Carrinho extends Component {
                     </span>
                     <Button onClick={this.props.onHide}>Fechar</Button>
                     <Button variant="danger" onClick={() => this.handleDeleteButtonClick()}>Limpar Todos</Button>
-                    <Button variant="success" onClick={this.props.onHide}>Finalizar Compra</Button>
+                    <Button variant="success" onClick={() => this.handleOrderButtonClick()}>Finalizar Compra</Button>
                 </Modal.Footer>
             </Modal>
         </div>
