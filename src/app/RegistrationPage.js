@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import './RegistrationPage.css'
 
 class RegistrationPage extends Component{
   state={
@@ -50,16 +51,25 @@ class RegistrationPage extends Component{
     this.setState({imagePath: evt.target.value});
   }
 
-  async handleRegistration(){
-  }
+
 
   render(){
     return (
-      <Container style={{minHeight: '100vh', marginTop:'6%'}}>
+      <Container style={{minHeight: '100vh', marginTop:'6%', minWidth:"100%",
+        backgroundImage: "url('https://img.freepik.com/premium-vector/background-with-colorful-shopping-bags-vector-illustration-sale-discount-concept_653240-59.jpg')",
+        backgroundRepeat: "repeat",
+        backgroundSize: "100%"
+        }}>
         <Row className="justify-content-center">
-          <Col md={6} style={{marginTop:'5%'}}>
-            <h1 className="text-center">Criar Conta</h1>
-            <Form>
+          <Col md={6} style={{marginTop:'5%', display:"grid", justifyContent:"center"}}>
+            <Form style={{
+              backgroundColor: "whitesmoke",
+              borderRadius: "10px",
+              padding: "21px",
+              textAlign: "center",
+              width: "600px"
+              }}>
+              <h1 className="text-center">Criar Conta</h1>
               <Form.Group controlId="formName">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control
@@ -126,6 +136,17 @@ class RegistrationPage extends Component{
                 />
               </Form.Group>
 
+              <Form.Group controlId="formImage">
+                <Form.Label>Imagem</Form.Label>
+                <Form.Control
+                  type="file"
+                  placeholder="Insira a sua imagem"
+                  name="imagePath"
+                  value={this.state.imagePath}
+                  onChange={(evt) => this.handleImagePath(evt)}
+                />
+              </Form.Group>
+
               <Form.Group controlId="formGender">
                 <Form.Label>Género</Form.Label>
                 <Form.Check
@@ -143,17 +164,6 @@ class RegistrationPage extends Component{
                   value="Feminino"
                   checked={this.state.gender === 'Feminino'}
                   onChange={(evt) => this.handleGender(evt)}
-                />
-              </Form.Group>
-
-              <Form.Group controlId="formImage">
-                <Form.Label>Imagem</Form.Label>
-                <Form.Control
-                  type="file"
-                  placeholder="Insira a sua imagem"
-                  name="imagePath"
-                  value={this.state.imagePath}
-                  onChange={(evt) => this.handleImagePath(evt)}
                 />
               </Form.Group>
               <br />
