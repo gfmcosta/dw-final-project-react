@@ -18,10 +18,21 @@ class ProductDetails extends Component {
     };
 
     handleQuantity = (e) => {
-        this.setState({ quantity: e.target.value }, () => {
-          console.log(this.state.quantity);
-        });
-      };
+
+        const enteredValue = e.target.value;
+        const { products } = this.state;
+        let updatedValue;
+
+        if (enteredValue >= 1 && enteredValue <= products.quantity) {
+          updatedValue = enteredValue;
+        } else {
+          updatedValue = products.quantity;
+        }
+
+        this.setState({ quantity: updatedValue },() => {
+        console.log(this.state.quantity);
+      });
+    }
 
     
       handleClick = (size) => {
