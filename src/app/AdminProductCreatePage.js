@@ -19,6 +19,31 @@ class AdminProductCreatePage extends Component {
         }
       }
 
+      handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent default form submission
+        const desc = this.state.description;
+      
+        try {
+          const response = await fetch('http://localhost:5072/API/product/create', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ description: desc })
+          });
+          console.log(response)
+          if (response.status === 200) {
+            console.log("entrou")
+            window.location.href = '/admin/category';
+          } else {
+            console.log('Error:', response.status);
+          }
+        } catch (error) {
+          console.log('Error:', error);
+        }
+      }
+
+
     render(){
         return (
             <div>
@@ -30,7 +55,7 @@ class AdminProductCreatePage extends Component {
                 <hr />
                 <div class="row">
                     <div class="col-md-4">
-                        <form enctype="multipart/form-data" action="/Product/Create" method="post">
+                        <form onSubmit={this.handleSubmit}>
                             
                             <div class="form-group">
                                 <label class="control-label" for="name">Nome</label>

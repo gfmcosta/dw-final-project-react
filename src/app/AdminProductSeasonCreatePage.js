@@ -3,6 +3,33 @@ import SubHeader from './SubHeader';
 
 class AdminProductSeasonCreatePage extends Component {
 
+    state = {
+        description: ''
+    }
+    handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent default form submission
+        const desc = this.state.description;
+      
+        try {
+          const response = await fetch('http://localhost:5072/API/seasonproduct/create', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ description: desc })
+          });
+          console.log(response)
+          if (response.status === 200) {
+            console.log("entrou")
+            window.location.href = '/admin/productseason';
+          } else {
+            console.log('Error:', response.status);
+          }
+        } catch (error) {
+          console.log('Error:', error);
+        }
+      }
+
     render(){
         return (
             <div>
@@ -13,11 +40,25 @@ class AdminProductSeasonCreatePage extends Component {
                     <hr />
                     <div class="row">
                         <div class="col-md-4">
-                            <form action="/Product_Season/Create" method="post">
+                            <form onSubmit={this.handleSubmit}>
                                 
                                 <div class="form-group">
                                     <label class="control-label" for="description">description</label>
-                                    <input class="form-control" type="text" data-val="true" data-val-required="The description field is required." id="description" name="description" value="" />
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        data-val="true"
+                                        data-val-length="A Descrição só pode ter apenas 50 caracteres"
+                                        data-val-length-max="50"
+                                        data-val-regex="Tem de escrever uma Descrição válida"
+                                        data-val-regex-pattern="^[a-zçãõáéíóúA-ZÇÃÕÁÉÍÓÚ -]+$"
+                                        data-val-required="A Descrição é de preenchimento obrigatório"
+                                        id="description"
+                                        maxLength="50"
+                                        name="description"
+                                        value={this.state.description}
+                                        onChange={event => this.setState({ description: event.target.value })}
+                                    />
                                     <span class="text-danger field-validation-valid" data-valmsg-for="description" data-valmsg-replace="true"></span>
                                 </div>
                                 <br/>

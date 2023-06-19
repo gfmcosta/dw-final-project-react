@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState} from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './RegistrationPage.css'
 
 class RegistrationPage extends Component{
@@ -14,11 +16,11 @@ class RegistrationPage extends Component{
     gender: '',
     imagePath: '',
   }
-
+  
   handleNameChange(evt){
     this.setState({name: evt.target.value});
   }
-
+  
   handleEmailChange(evt){
     this.setState({email: evt.target.value});
   }
@@ -30,36 +32,82 @@ class RegistrationPage extends Component{
   handlePhoneNumber(evt){
     this.setState({phoneNumber: evt.target.value});
   }
-
+  
   handleAddress(evt){
     this.setState({address: evt.target.value});
   }
-
+  
   handlePostalCode(evt){
     this.setState({postalCode: evt.target.value});
   }
-
-  handleDataNasc(evt){
-    this.setState({dataNasc: evt.target.value});
+  
+  handleDataNasc(data){
+    this.setState({dataNasc: data});
   }
-
+  
   handleGender(evt){
     this.setState({gender: evt.target.value});
   }
+  
+  handleImagePath = (event) => {
+    const file = event.target.files[0];
+    const fileName = file.name;
 
-  handleImagePath(evt){
-    this.setState({imagePath: evt.target.value});
-  }
-
-
-
-  render(){
-    return (
-      <Container style={{minHeight: '100vh', marginTop:'6%', minWidth:"100%",
-        backgroundImage: "url('https://img.freepik.com/premium-vector/background-with-colorful-shopping-bags-vector-illustration-sale-discount-concept_653240-59.jpg')",
-        backgroundRepeat: "repeat",
-        backgroundSize: "100%"
-        }}>
+    // Convert the image file to data URL
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imageDataUrl = e.target.result;
+      // Update the state with the image data URL
+      this.setState({ imagePath: imageDataUrl });
+    };
+  
+    reader.readAsDataURL(file);
+  };
+  
+  
+      
+      async handleRegistration(){
+        const data = {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          phoneNumber: this.state.phoneNumber,
+          address: this.state.address,
+          postalCode: this.state.postalCode,
+          dataNasc: this.state.dataNasc,
+          gender: this.state.gender,
+          imagePath: this.state.imagePath,
+        };
+        console.log(data)
+        await fetch(`http://localhost:5072/API/Register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }).then(response => {
+          if(response.status === 200){
+            alert("Utilizador registado com sucesso");
+                window.location.href = "/";
+            }else{
+              alert("Ocorreu um erro ao realizar o registo");
+            }
+            response.json()})
+            .catch(error => {
+              // Handle any errors
+              console.error(error);
+              alert("Ocorreu um erro ao realizar registo");
+            });
+          }
+          
+          
+          render(){
+            return (
+              <Container style={{minHeight: '100vh', marginTop:'6%', minWidth:"100%",
+              backgroundImage: "url('https://img.freepik.com/premium-vector/background-with-colorful-shopping-bags-vector-illustration-sale-discount-concept_653240-59.jpg')",
+              backgroundRepeat: "repeat",
+              backgroundSize: "100%"
+            }}>
         <Row className="justify-content-center">
           <Col md={6} style={{marginTop:'5%', display:"grid", justifyContent:"center"}}>
             <Form style={{
@@ -136,14 +184,26 @@ class RegistrationPage extends Component{
                 />
               </Form.Group>
 
+              <Form.Group controlId="formDataNasc">
+                <Form.Label>Data de Nascimento</Form.Label>
+                <DatePicker
+                  selected={this.state.dataNasc}
+                  onChange={(date) => this.handleDataNasc(date)}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="Selecione a data de nascimento"
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                />
+            </Form.Group>
+
               <Form.Group controlId="formImage">
                 <Form.Label>Imagem</Form.Label>
                 <Form.Control
                   type="file"
+                  accept="image/*"
                   placeholder="Insira a sua imagem"
-                  name="imagePath"
-                  value={this.state.imagePath}
-                  onChange={(evt) => this.handleImagePath(evt)}
+                  onChange={this.handleImagePath}
                 />
               </Form.Group>
 
@@ -153,16 +213,16 @@ class RegistrationPage extends Component{
                   type="radio"
                   label="Masculino"
                   name="gender"
-                  value="Masculino"
-                  checked={this.state.gender === 'Masculino'}
+                  value="M"
+                  checked={this.state.gender === 'M'}
                   onChange={(evt) => this.handleGender(evt)}
                 />
                 <Form.Check
                   type="radio"
                   label="Feminino"
                   name="gender"
-                  value="Feminino"
-                  checked={this.state.gender === 'Feminino'}
+                  value="F"
+                  checked={this.state.gender === 'F'}
                   onChange={(evt) => this.handleGender(evt)}
                 />
               </Form.Group>

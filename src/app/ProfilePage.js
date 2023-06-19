@@ -86,8 +86,6 @@ class ProfilePage extends Component{
 
       handleFileInputChange = (event) => {
         const file = event.target.files[0];
-        //const newImagePath = URL.createObjectURL(file);
-        //console.log(newImagePath);
         const reader = new FileReader();
 
         reader.onloadend = () => {

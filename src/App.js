@@ -19,8 +19,6 @@ import AdminOrderItemPage from './app/AdminOrderItemPage'
 import AdminProductPage from './app/AdminProductPage'
 import AdminSeasonPage from './app/AdminSeasonPage'
 import AdminCategoryCreatePage from './app/AdminCategoryCreatePage'
-import AdminOrderCreatePage from './app/AdminOrderCreatePage'
-import AdminOrderItemCreatePage from './app/AdminOrderItemCreatePage'
 import AdminProductCreatePage from './app/AdminProductCreatePage'
 import AdminProductSeasonCreatePage from './app/AdminProductSeasonCreatePage'
 
@@ -72,12 +70,10 @@ class App extends Component {
           <Route path="/admin/product" element={<AdminProductPage/>}/>
           <Route path="/admin/productseason" element={<AdminSeasonPage/>}/>
           <Route path="/admin/category/create" element={<AdminCategoryCreatePage/>}/>
-          <Route path="/admin/order/create" element={<AdminOrderCreatePage/>}/>
-          <Route path="/admin/orderitem/create" element={<AdminOrderItemCreatePage/>}/>
           <Route path="/admin/product/create" element={<AdminProductCreatePage/>}/>
           <Route path="/admin/productseason/create" element={<AdminProductSeasonCreatePage/>}/>
         </Routes>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </div>
     );
   }
