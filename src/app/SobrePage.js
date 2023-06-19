@@ -34,8 +34,8 @@ class SobrePage extends Component {
                     <div className='right'><h2>GONÇALO COSTA</h2></div>
                     <div className='left'><p>aluno23882@ipt.pt</p></div>
                     <div className='right'><p>aluno23692@ipt.pt</p></div>
-                    <div className='left'><p>Computer Science and Engineering student aiming for a Cybersecurity career</p></div>
-                    <div className='right'><p>Junior Software Engineer | Full Stack Developer | Ambassador @ Magma Studio</p></div>
+                    <div className='left'><p>Computer Science and Engineering Student aiming for a Cybersecurity career</p></div>
+                    <div className='right'><p>Computer Science and Engineering Student</p><p>@Magma Studio Ambassador</p></div>
                 </div><br/><br/>
                 <div style={{width:"100%", textAlign:"justify"}}><p>Este projeto visa a criação de duas aplicações Web | Uma aplicação web que permita aceder e manipular informação presente numa base de dados através de Web Services “Front-End e Web Services” | Uma aplicação web, em ambiente server side, onde os seus utilizadores acedam a informação diferenciada em função das suas características e permissões “programação lado servidor” |Loja online de Roupa 'Água Salgada' | Da autoria de Gonçalo Costa 23692 & João Gonçalves 23882</p>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

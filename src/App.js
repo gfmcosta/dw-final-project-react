@@ -32,12 +32,21 @@ function RegistrationLayout({ children }) {
 
 class App extends Component {
   state = {
-    modalShow: false
+    modalShow: false,
+    isAdmin: false,
   };
 
   handleModalShow = () => {
     this.setState({ modalShow: true });
   };
+
+  componentDidMount() {
+    if (sessionStorage.getItem('user') != null) {
+      if (JSON.parse(sessionStorage.getItem('user')).email.contains('@admin.ipt.pt')) {
+        this.setState({isAdmin : true});
+      }
+    }
+  }
 
   render() {
     return (
@@ -62,7 +71,9 @@ class App extends Component {
           <Route path="/product" element={<ProductDetails/>}/>
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/about" element={<SobrePage/>}/>
-          <Route path="/admin" element={<AdminPage/>}/>
+          {/* {condition ? <p>Condição é verdadeira</p> : <p>Condição é falsa</p>} */}
+          {this.state.isAdmin ? <Route path="/admin" element={<AdminPage/>}/> : null}
+          {/* <Route path="/admin" element={<AdminPage/>}/> */}
           <Route path="/admin/category" element={<AdminCategoryPage/>}/>
           <Route path="/admin/person" element={<AdminPersonPage/>}/>
           <Route path="/admin/order" element={<AdminOrderPage/>}/>
