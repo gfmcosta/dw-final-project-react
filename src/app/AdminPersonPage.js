@@ -25,9 +25,8 @@ class AdminPersonPage extends Component {
             <div>
                 <SubHeader />
             <div style={{marginTop:"200px", width:"70%", left:"50%", transform:"translate(-50%)", position:"absolute", textAlign:"left"}}>
-                <h1>Index</h1>
+                <h1>Lista de Pessoas</h1>
                 <p>
-                    <a href="/Category/Create">Create New</a>
                 </p>
                 <table class="table">
                     <thead>
@@ -51,10 +50,10 @@ class AdminPersonPage extends Component {
                             Sexo
                         </th>
                         <th>
-                            imagePath
+                            Imagem
                         </th>
                         <th>
-                            userId
+                            UtilizadorID
                         </th>
                         <th></th>
                         </tr>

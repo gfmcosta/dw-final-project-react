@@ -12,7 +12,7 @@ class AdminOrderItemPage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-        let res = await fetch(`http://localhost:5072/API/Order`, requestOptions).catch(error => console.log('error', error));;
+        let res = await fetch(`http://localhost:5072/API/OrderItems`, requestOptions).catch(error => console.log('error', error));;
         let result = await res.json();
         if (res.status === 200){
           console.log(result);
@@ -25,9 +25,8 @@ class AdminOrderItemPage extends Component {
             <div>
                 <SubHeader />
             <div style={{marginTop:"200px", width:"70%", left:"50%", transform:"translate(-50%)", position:"absolute", textAlign:"left"}}>
-                <h1>Index</h1>
+                <h1>Lista de itens numa Encomenda</h1>
                 <p>
-                    <a href="/admin/orderitem/create">Create New</a>
                 </p>
                 <table class="table">
                     <thead>
@@ -42,10 +41,10 @@ class AdminOrderItemPage extends Component {
                             Preço
                         </th>
                         <th>
-                            Order
+                            Encomenda
                         </th>
                         <th>
-                            Product
+                            Produto
                         </th>
                         <th>
                             Tamanho

@@ -51,8 +51,6 @@ class RegistrationPage extends Component{
   
   handleImagePath = (event) => {
     const file = event.target.files[0];
-    const fileName = file.name;
-
     // Convert the image file to data URL
     const reader = new FileReader();
     reader.onload = (e) => {

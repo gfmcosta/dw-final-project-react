@@ -14,8 +14,8 @@ class AdminOrderPage extends Component {
         };
         let res = await fetch(`http://localhost:5072/API/Order`, requestOptions).catch(error => console.log('error', error));;
         let result = await res.json();
+        console.log(result);
         if (res.status === 200){
-          console.log(result);
           this.setState({Encomenda: result});
         }
     }
@@ -25,9 +25,8 @@ class AdminOrderPage extends Component {
             <div>
                 <SubHeader />
             <div style={{marginTop:"200px", width:"70%", left:"50%", transform:"translate(-50%)", position:"absolute", textAlign:"left"}}>
-                <h1>Index</h1>
+                <h1>Lista de Pedidos</h1>
                 <p>
-                    <a href="/admin/order/create">Create New</a>
                 </p>
                 <table class="table">
                     <thead>
@@ -42,7 +41,7 @@ class AdminOrderPage extends Component {
                             IVA
                         </th>
                         <th>
-                            Person
+                            Utilizador
                         </th>
                         <th></th>
                         </tr>

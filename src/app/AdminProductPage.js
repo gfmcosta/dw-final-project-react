@@ -26,9 +26,9 @@ class AdminProductPage extends Component {
             <div>
                 <SubHeader />
             <div style={{marginTop:"200px", width:"70%", left:"50%", transform:"translate(-50%)", position:"absolute", textAlign:"left"}}>
-                <h1>Index</h1>
+                <h1>Lista de Produtos</h1>
                 <p>
-                    <a href="/admin/product/Create">Create New</a>
+                    <a href="/admin/product/Create">Criar Produto</a>
                 </p>
                 <table class="table">
                     <thead>
@@ -46,10 +46,10 @@ class AdminProductPage extends Component {
                             Preço
                         </th>
                         <th>
-                            ImagePath
+                            Imagem
                         </th>
                         <th>
-                            Season
+                            Época
                         </th>
                         <th></th>
                         </tr>

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import { Form } from 'react-bootstrap';
 import SubHeader from './SubHeader';
 
 class AdminProductCreatePage extends Component {
 
     state={
-        epoca: []
+        epoca: [],
+        name: '',
+        description: '',
+        quantity: 0,
+        priceAux: 0,
+        imagePath: '',
+        seasonFK: 1
     }
 
     async componentDidMount(){
@@ -19,22 +26,34 @@ class AdminProductCreatePage extends Component {
         }
       }
 
-      handleSubmit = async (event) => {
-        event.preventDefault(); // Prevent default form submission
-        const desc = this.state.description;
+      handleImagePath = (event) => {
+        const file = event.target.files[0];    
+        // Convert the image file to data URL
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageDataUrl = e.target.result;
+          // Update the state with the image data URL
+          this.setState({ imagePath: imageDataUrl });
+        };
       
+        reader.readAsDataURL(file);
+      };
+
+      handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent default form submission      
         try {
+          const data ={name: this.state.name, description: this.state.description, quantity: this.state.quantity, priceAux: this.state.priceAux, imagePath: this.state.imagePath, seasonFK: this.state.seasonFK}
           const response = await fetch('http://localhost:5072/API/product/create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ description: desc })
+            body: JSON.stringify(data)
           });
           console.log(response)
           if (response.status === 200) {
             console.log("entrou")
-            window.location.href = '/admin/category';
+            window.location.href = '/admin/product';
           } else {
             console.log('Error:', response.status);
           }
@@ -59,34 +78,49 @@ class AdminProductCreatePage extends Component {
                             
                             <div class="form-group">
                                 <label class="control-label" for="name">Nome</label>
-                                <input class="form-control" type="text" data-val="true" data-val-regex="Tem de escrever um Nome válido" data-val-regex-pattern="^[a-zçãõáéíóúA-ZÇÃÕÁÉÍÓÚ -]+$" data-val-required="O Nome é de preenchimento obrigatório" id="name" name="name" value="" />
+                                <input class="form-control" type="text" data-val="true" data-val-regex="Tem de escrever um Nome válido" data-val-regex-pattern="^[a-zçãõáéíóúA-ZÇÃÕÁÉÍÓÚ -]+$" data-val-required="O Nome é de preenchimento obrigatório" id="name" name="name"
+                                value={this.state.name}
+                                onChange={event => this.setState({ name: event.target.value })} />
                                 <span class="text-danger field-validation-valid" data-valmsg-for="name" data-valmsg-replace="true"></span>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="description">Descrição</label>
-                                <input class="form-control" type="text" data-val="true" data-val-regex="Tem de escrever uma Descrição válida" data-val-regex-pattern="^[a-zçãõáéíóúA-ZÇÃÕÁÉÍÓÚ -]+$" data-val-required="A Descrição é de preenchimento obrigatório" id="description" name="description" value="" />
+                                <input class="form-control" type="text" data-val="true" data-val-regex="Tem de escrever uma Descrição válida" data-val-regex-pattern="^[a-zçãõáéíóúA-ZÇÃÕÁÉÍÓÚ -]+$" data-val-required="A Descrição é de preenchimento obrigatório" id="description" name="description"
+                                value={this.state.description}
+                                onChange={event => this.setState({ description: event.target.value })} />
                                 <span class="text-danger field-validation-valid" data-valmsg-for="description" data-valmsg-replace="true"></span>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="quantity">Quantidade</label>
-                                <input class="form-control" type="number" data-val="true" data-val-range="A Quantidade mínima é 0." data-val-range-max="2147483647" data-val-range-min="0" data-val-required="A Quantidade é de preenchimento obrigatório" id="quantity" name="quantity" value="" /><input name="__Invariant" type="hidden" value="quantity" />
+                                <input class="form-control" type="number" data-val="true" data-val-range="A Quantidade mínima é 0." data-val-range-max="2147483647" data-val-range-min="0" data-val-required="A Quantidade é de preenchimento obrigatório" id="quantity" name="quantity" 
+                                value={this.state.quantity}
+                                onChange={event => this.setState({ quantity: event.target.value })}/>
                                 <span class="text-danger field-validation-valid" data-valmsg-for="quantity" data-valmsg-replace="true"></span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="priceAux">Preçoo</label>
-                                <input class="form-control" type="text" data-val="true" data-val-regex="No Preçoo só pode usar algarismos, e se desejar, duas casas decimais no final." data-val-regex-pattern="[0-9]+[.,]?[0-9]{1,2}" data-val-required="O Preço é de preenchimento obrigatório" id="priceAux" name="priceAux" value="" />
+                                <label class="control-label" for="priceAux">Preço</label>
+                                <input class="form-control" type="text" data-val="true" data-val-regex="No Preçoo só pode usar algarismos, e se desejar, duas casas decimais no final." data-val-regex-pattern="[0-9]+[.,]?[0-9]{1,2}" data-val-required="O Preço é de preenchimento obrigatório" id="priceAux" name="priceAux"
+                                value={this.state.priceAux}
+                                onChange={event => this.setState({ priceAux: event.target.value })} />
                                 <span class="text-danger field-validation-valid" data-valmsg-for="priceAux" data-valmsg-replace="true"></span>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="imagePath">imagePath</label>
-                                <input name="imageFile" class="form-control" type="file" accept="image/*" />
-                                <span class="text-danger field-validation-valid" data-valmsg-for="imagePath" data-valmsg-replace="true"></span>
-                            </div>
+                            <Form.Group controlId="formImage">
+                            <Form.Label>Imagem</Form.Label>
+                            <Form.Control
+                              type="file"
+                              accept="image/*"
+                              placeholder="Insira a sua imagem"
+                              onChange={this.handleImagePath}
+                            />
+                          </Form.Group>
                             <div class="form-group">
                                 <label class="control-label" for="seasonFK">seasonFK</label>
-                                <select class="form-control" data-val="true" data-val-required="The seasonFK field is required." id="seasonFK" name="seasonFK">
+                                <select class="form-control" data-val="true" data-val-required="The seasonFK field is required." id="seasonFK" name="seasonFK"
+                                value={this.state.seasonFK}
+                                onChange={event => this.setState({ seasonFK: event.target.value })}
+                                >
                                     {this.state.epoca.map((seas) => (
-                                    <option value="4">
+                                    <option value={seas.id}>
                                         {seas.description}
                                     </option>))}
                                 </select>
