@@ -108,6 +108,7 @@ class RegistrationPage extends Component{
         }
           
           render(){
+              const maxDate = new Date();
             return (
               <Container style={{minHeight: '100vh', marginTop:'6%', minWidth:"100%",
               backgroundImage: "url('https://img.freepik.com/premium-vector/background-with-colorful-shopping-bags-vector-illustration-sale-discount-concept_653240-59.jpg')",
@@ -197,6 +198,7 @@ class RegistrationPage extends Component{
                   onChange={(date) => this.handleDataNasc(date)}
                   dateFormat="dd/MM/yyyy"
                   placeholderText="Selecione a data de nascimento"
+                  maxDate={maxDate}
                   showMonthDropdown
                   showYearDropdown
                   dropdownMode="select"

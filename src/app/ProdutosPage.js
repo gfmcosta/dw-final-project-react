@@ -59,7 +59,7 @@ class ProdutosPage extends Component {
   
   }
  
-
+  
   render() {
     // const allProducts = this.state.products;
     const filteredProducts = this.state.selectedSeason
