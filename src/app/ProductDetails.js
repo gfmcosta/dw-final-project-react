@@ -61,7 +61,9 @@ class ProductDetails extends Component {
           size: this.state.selectedSize,
           number: productList.length + 1,
           name: this.state.products.name,
+          image: this.state.products.imagePath,
         };
+        console.log(updatedProduct);
                 // Append the new product to the list
                 productList.push(updatedProduct);
 
@@ -95,6 +97,7 @@ class ProductDetails extends Component {
         if (res.status === 200){
           this.setState({products: result});
           console.log(result);
+          window.scrollTo(0, 0);
         }
       }
 
@@ -105,7 +108,7 @@ class ProductDetails extends Component {
                 <div className="row" >
                     <div className="col-md-6">
                         <img
-                        src="https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic"
+                        src={`http://localhost:5072/images/${this.state.products.imagePath}`}
                         alt="Product"
                         className="img-fluid"
                         />
@@ -116,7 +119,7 @@ class ProductDetails extends Component {
                         <p>Cor</p>
                         <div className="col-md-6" style={{maxWidth:"200px"}}>
                             <img
-                            src="https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic"
+                            src={`http://localhost:5072/images/${this.state.products.imagePath}`}
                             alt="Product"
                             className="img-fluid"
                             style={{width:"40%", cursor:"pointer", border:"2px solid black"}}

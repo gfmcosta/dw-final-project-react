@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button, Toast } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
 import "./ProfilePage.css"
 
 class ProfilePage extends Component{
@@ -22,6 +23,10 @@ class ProfilePage extends Component{
       toastType: '',
     }
 
+    convertISODateToJSDate(isoDate) {
+      return new Date(isoDate);
+    }
+
     async componentDidMount(){
       //this.setState({ storedUser: sessionStorage.getItem('user') });
       //this.setState({ email: this.state.storedUser.email });
@@ -40,9 +45,11 @@ class ProfilePage extends Component{
       let result = await res.json();
       if (res.status==200){
         console.log(result)
-        const { name, phoneNumber, address, postalCode, gender, imagePath} = result;
+        const { name, phoneNumber, address, postalCode, gender, imagePath, dataNasc} = result;
         const { email, password } = user;
+        const convertedDataNasc = this.convertISODateToJSDate(dataNasc);
         this.setState({ name, email, password, phoneNumber, address, postalCode, gender, imagePath});
+        this.setState({ dataNasc: convertedDataNasc });
         console.log(this.state.imagePath)
         this.setState({strSource: `http://localhost:5072/images/${this.state.imagePath}`})
       }
@@ -72,8 +79,8 @@ class ProfilePage extends Component{
         this.setState({postalCode: evt.target.value});
       }
     
-      handleDataNasc(evt){
-        this.setState({dataNasc: evt.target.value});
+      handleDataNasc(data){
+        this.setState({dataNasc: data});
       }
     
       handleGenderChange(evt){
@@ -106,7 +113,7 @@ class ProfilePage extends Component{
             phoneNumber: this.state.phoneNumber,
             address: this.state.address,
             postalCode: this.state.postalCode,
-            //dataNasc: this.state.dataNasc
+            dataNasc: this.state.dataNasc,
             gender: this.state.gender,
             imagePath:this.state.imagePath
           };
@@ -137,6 +144,7 @@ class ProfilePage extends Component{
 
 
       render(){
+        const maxDate = new Date();
         return (
             <>
             <div className="center-image" style={{ gridColumn: "1", gridRow: "1", marginTop:"10%"}}>
@@ -154,6 +162,7 @@ class ProfilePage extends Component{
                   style={{ display: 'none' }}
                   ref={(input) => (this.fileInputRef = input)}
                   onChange={this.handleFileInputChange}
+                  disabled={!this.state.editMode}
                 />
             </div>
 
@@ -222,10 +231,26 @@ class ProfilePage extends Component{
                             />
                     </Form.Group>
                 </div>
-
+                <div className="center" >
+                    <Form.Group controlId="formPhoneNumber">
+                        <Form.Label>Data de Nascimento</Form.Label>
+                        <DatePicker
+                          selected={this.state.dataNasc}
+                          onChange={(date) => this.handleDataNasc(date)}
+                          dateFormat="dd/MM/yyyy"
+                          placeholderText="Selecione a data de nascimento"
+                          maxDate={maxDate}
+                          showMonthDropdown
+                          showYearDropdown
+                          dropdownMode="select"
+                          disabled={!this.state.editMode}
+                        />
+                    </Form.Group>
+                </div>
+                
                 <div style={{justifyContent:"center"}}>
                 <Form.Group controlId="formGender">
-                    <Form.Label></Form.Label>
+                    <Form.Label>Género</Form.Label><br/>
                     <Form.Select
                     style={{width:"75%", display:"inline"}}
                     name = "gender"
