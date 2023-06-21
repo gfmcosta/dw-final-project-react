@@ -42,8 +42,8 @@ class ProfilePage extends Component{
         redirect: 'follow'
       };
       let res = await fetch(`http://localhost:5072/API/Profile/${user.person.id}`, requestOptions).catch(error => console.log('error', error));
-      let result = await res.json();
-      if (res.status==200){
+      if (res !== undefined && res.status==200){
+        let result = await res.json();
         console.log(result)
         const { name, phoneNumber, address, postalCode, gender, imagePath, dataNasc} = result;
         const { email, password } = user;
@@ -52,6 +52,8 @@ class ProfilePage extends Component{
         this.setState({ dataNasc: convertedDataNasc });
         console.log(this.state.imagePath)
         this.setState({strSource: `http://localhost:5072/images/${this.state.imagePath}`})
+      }else{
+        this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao carregar o perfil', toastType: 'danger' });
       }
     }
 
@@ -127,7 +129,7 @@ class ProfilePage extends Component{
             body: JSON.stringify(data)
           })
             .then(response => {
-              if(response.status === 200){
+              if(response !== undefined && response.status === 200){
                 this.setState({ showToast: true, toastMessage: 'Perfil alterado com sucesso', toastType: 'success' });
               }else{
                 this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao alterar o perfil', toastType: 'danger' });

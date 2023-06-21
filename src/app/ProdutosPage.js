@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, Button, Form} from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form, Toast} from 'react-bootstrap';
 import "./ProdutosPage.css"
 import { hover } from '@testing-library/user-event/dist/hover';
 import { NavLink } from "react-router-dom";
@@ -7,31 +7,10 @@ class ProdutosPage extends Component {
     state = {
       selectedSeason: '',
       filteredProducts: null,
-      // products : [
-      //   {
-      //     id: 1,
-      //     name: 'Product 1',
-      //     description: 'Description of Product 1',
-      //     season: 'verao',
-      //     image: 'https://via.placeholder.com/350x250',
-      //   },
-      //   {
-      //     id: 2,
-      //     name: 'Product 2',
-      //     description: 'Description of Product 2',
-      //     season: 'primavera',
-      //     image: 'https://via.placeholder.com/350x250',
-      //   },
-      //   {
-      //     id: 3,
-      //     name: 'Product 3',
-      //     description: 'Description of Product 3',
-      //     season: 'outono',
-      //     image: 'https://via.placeholder.com/350x250',
-      //   },
-      //   // Add more products here
-      // ],
       products : [],
+      showToast: false,
+      toastMessage: '',
+      toastType: '',
     };
 
   // Handler for changing selected season
@@ -50,16 +29,20 @@ class ProdutosPage extends Component {
       method: 'GET',
       redirect: 'follow'
     };
-    let res = await fetch(`http://localhost:5072/API/Products`, requestOptions).catch(error => console.log('error', error));;
-    let result = await res.json();
-    if (res.status === 200){
+    let res = await fetch(`http://localhost:5072/API/Products`, requestOptions).catch(error => console.log('error', error));
+    console.log(res);
+    if (res !== undefined && res.status === 200){
+      let result = await res.json();
       console.log(result.$values);
       this.setState({products: result});
+    }
+    else{
+      this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao carregar os produtos', toastType: 'danger' });
     }
   
   }
  
-  
+
   render() {
     // const allProducts = this.state.products;
     const filteredProducts = this.state.selectedSeason
@@ -104,6 +87,14 @@ class ProdutosPage extends Component {
           ))}
         </div>
         <br/><br/><br/><br/><br/><br/><br/>
+        <Toast show={this.state.showToast} onClose={() => this.setState({showToast:false})} delay={5000} autohide   style={{ position: 'fixed', top: '18%', right: '20px' }} bg={this.state.toastType}>
+                          <Toast.Header>
+                            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                            <strong className="me-auto">Sistema</strong>
+                            <small>Há 1 segundo atrás</small>
+                          </Toast.Header>
+                          <Toast.Body>{this.state.toastMessage}</Toast.Body>
+                        </Toast>
       </Container>
     );
   }

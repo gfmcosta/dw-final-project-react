@@ -69,10 +69,7 @@ class ProductDetails extends Component {
 
                 // Update the session storage with the updated list
                 sessionStorage.setItem('shoppingCart', JSON.stringify(productList));
-                this.setState({ showToast: true, toastMessage: 'Produto adicionado ao carrinho', toastType: 'success' });
-            
-          
-        
+                this.setState({ showToast: true, toastMessage: 'Produto adicionado ao carrinho', toastType: 'success' }); 
       }
         setTimeout(() => {
           this.setState({ cartClick: false });
@@ -92,12 +89,13 @@ class ProductDetails extends Component {
           redirect: 'follow'
         };
         let res = await fetch(`http://localhost:5072/API/Products/${s}`, requestOptions).catch(error => console.log('error', error));;
-        let result = await res.json();
-        
-        if (res.status === 200){
+        if(res !== undefined && res.status === 200){
+          let result = await res.json();
           this.setState({products: result});
           console.log(result);
           window.scrollTo(0, 0);
+        }else{
+          this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao carregar o produto', toastType: 'danger' });
         }
       }
 
