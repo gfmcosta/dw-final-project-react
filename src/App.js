@@ -21,6 +21,8 @@ import AdminSeasonPage from './app/AdminSeasonPage'
 import AdminCategoryCreatePage from './app/AdminCategoryCreatePage'
 import AdminProductCreatePage from './app/AdminProductCreatePage'
 import AdminProductSeasonCreatePage from './app/AdminProductSeasonCreatePage'
+import PrivateRoute from './PrivateRoute';
+import AcessoNegado from './app/AcessoNegado';
 
 function RegistrationLayout({ children }) {
   return (
@@ -33,6 +35,7 @@ function RegistrationLayout({ children }) {
 class App extends Component {
   state = {
     modalShow: false,
+    isAuth: false,
     isAdmin: false,
   };
 
@@ -42,8 +45,10 @@ class App extends Component {
 
   componentDidMount() {
     if (sessionStorage.getItem('user') != null) {
-      if (JSON.parse(sessionStorage.getItem('user')).email.contains('@admin.ipt.pt')) {
+      this.setState({isAuth : true});
+      if (JSON.parse(sessionStorage.getItem('user')).email.includes('@admin.ipt.pt')) {
         this.setState({isAdmin : true});
+        sessionStorage.setItem('isAdmin', true);
       }
     }
   }
@@ -71,18 +76,48 @@ class App extends Component {
           <Route path="/product" element={<ProductDetails/>}/>
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/about" element={<SobrePage/>}/>
-          {/* {condition ? <p>Condição é verdadeira</p> : <p>Condição é falsa</p>} */}
-          {this.state.isAdmin ? <Route path="/admin" element={<AdminPage/>}/> : null}
-          {/* <Route path="/admin" element={<AdminPage/>}/> */}
-          <Route path="/admin/category" element={<AdminCategoryPage/>}/>
-          <Route path="/admin/person" element={<AdminPersonPage/>}/>
-          <Route path="/admin/order" element={<AdminOrderPage/>}/>
-          <Route path="/admin/orderitem" element={<AdminOrderItemPage/>}/>
-          <Route path="/admin/product" element={<AdminProductPage/>}/>
-          <Route path="/admin/productseason" element={<AdminSeasonPage/>}/>
-          <Route path="/admin/category/create" element={<AdminCategoryCreatePage/>}/>
-          <Route path="/admin/product/create" element={<AdminProductCreatePage/>}/>
-          <Route path="/admin/productseason/create" element={<AdminProductSeasonCreatePage/>}/>
+          {/* {condition ? <p>Condition is true</p> : <p>Condition is false</p>} */}
+          <Route
+            path="/admin"
+            element={<PrivateRoute component={<AdminPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/category"
+            element={<PrivateRoute component={<AdminCategoryPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/person"
+            element={<PrivateRoute component={<AdminPersonPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/order"
+            element={<PrivateRoute component={<AdminOrderPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/orderitem"
+            element={<PrivateRoute component={<AdminOrderItemPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/product"
+            element={<PrivateRoute component={<AdminProductPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/productseason"
+            element={<PrivateRoute component={<AdminSeasonPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/category/create"
+            element={<PrivateRoute component={<AdminCategoryCreatePage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/product/create"
+            element={<PrivateRoute component={<AdminProductCreatePage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route
+            path="/admin/productseason/create"
+            element={<PrivateRoute component={<AdminProductSeasonCreatePage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+          />
+          <Route path="/acessoNegado" element={<AcessoNegado/>} />
         </Routes>
         {/* <Footer></Footer> */}
       </div>

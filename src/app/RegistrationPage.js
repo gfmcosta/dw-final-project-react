@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Toast } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './RegistrationPage.css'
@@ -15,6 +15,9 @@ class RegistrationPage extends Component{
     dataNasc:'',
     gender: '',
     imagePath: '',
+    showToast: false,
+    toastMessage: '',
+    toastType: '',
   }
   
   handleNameChange(evt){
@@ -65,39 +68,44 @@ class RegistrationPage extends Component{
   
       
       async handleRegistration(){
-        const data = {
-          name: this.state.name,
-          email: this.state.email,
-          password: this.state.password,
-          phoneNumber: this.state.phoneNumber,
-          address: this.state.address,
-          postalCode: this.state.postalCode,
-          dataNasc: this.state.dataNasc,
-          gender: this.state.gender,
-          imagePath: this.state.imagePath,
-        };
-        console.log(data)
-        await fetch(`http://localhost:5072/API/Register`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        }).then(response => {
-          if(response.status === 200){
-            alert("Utilizador registado com sucesso");
-                window.location.href = "/";
+        if(this.state.name=='' || this.state.email==''|| this.state.password=='' || this.state.phoneNumber=='' ||
+        this.state.address=='' || this.state.postalCode=='' || this.state.dataNasc=='' || this.state.gender=='' || this.state.email.includes("@admin.ipt.pt")){
+          this.setState({ showToast: true, toastMessage: 'Preencha todos os campos', toastType: 'warning' });
+        }else{
+
+          const data = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            phoneNumber: this.state.phoneNumber,
+            address: this.state.address,
+            postalCode: this.state.postalCode,
+            dataNasc: this.state.dataNasc,
+            gender: this.state.gender,
+            imagePath: this.state.imagePath,
+          };
+          await fetch(`http://localhost:5072/API/Register`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then(response => {
+            if(response.status === 200){
+              this.setState({ showToast: true, toastMessage: 'Utilizador registado com sucesso', toastType: 'success' });
+              window.location.href = "/";
             }else{
-              alert("Ocorreu um erro ao realizar o registo");
+              this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao registar', toastType: 'danger' });
             }
             response.json()})
             .catch(error => {
               // Handle any errors
               console.error(error);
-              alert("Ocorreu um erro ao realizar registo");
+              this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao registar', toastType: 'danger' });
             });
           }
           
+        }
           
           render(){
             return (
@@ -231,6 +239,14 @@ class RegistrationPage extends Component{
             </Form>
           </Col>
         </Row>
+        <Toast show={this.state.showToast} onClose={() => this.setState({showToast:false})} delay={5000} autohide   style={{ position: 'fixed', top: '18%', right: '20px' }} bg={this.state.toastType}>
+                          <Toast.Header>
+                            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                            <strong className="me-auto">Sistema</strong>
+                            <small>Há 1 segundo atrás</small>
+                          </Toast.Header>
+                          <Toast.Body>{this.state.toastMessage}</Toast.Body>
+        </Toast>
       </Container>
     );
   }

@@ -22,6 +22,7 @@ class Header extends Component {
         sessionStorage.removeItem('user');
         this.setState({isLoggedIn: false});
         sessionStorage.removeItem('shoppingCart');
+        sessionStorage.removeItem('isAdmin');
         window.location.href = "/";
     }
     render() {
@@ -64,14 +65,17 @@ class Header extends Component {
                   <Nav.Link className="d-flex align-items-center text-danger" onClick={this.handleLogout}>
                     Terminar Sessão
                   </Nav.Link>
-                  <Nav.Link href="/admin" className="d-flex align-items-center">
-                    <FaKey className="me-2" />
-                    <span>Admin</span>
-                  </Nav.Link>
                   </>
                 ):(
                   null
                 )}
+                {sessionStorage.getItem('isAdmin') === true ? (
+                  <>
+                  <Nav.Link href="/admin" className="d-flex align-items-center">
+                    <FaKey className="me-2" />
+                    <span>Admin</span>
+                  </Nav.Link>
+                  </>):(null)}
               </Nav>
             </Navbar.Collapse>
           </Container>
