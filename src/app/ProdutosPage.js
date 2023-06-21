@@ -87,7 +87,7 @@ class ProdutosPage extends Component {
           {filteredProducts.map((product) =>(
               <Card className="h-100" style={{}}>
                 <NavLink to={`/product?id=${product.id}`}>
-                  <Card.Img variant="top" /*src={`http://localhost:5072/images/${product.imagePath}`*/ src={`https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic`} 
+                  <Card.Img variant="top" src={`http://localhost:5072/images/${product.imagePath}`} 
                     className="card-image" 
                     style={{ maxWidth:"fit-content", height: "auto", objectFit: "cover", alignSelf:"center"}}
                   />
