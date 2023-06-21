@@ -12,6 +12,7 @@ class Carrinho extends Component {
 
         setInterval(() => {
             let shoppingCartAux = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
+            console.log(shoppingCartAux);
             if(this.state.shoppingCart.length !== shoppingCartAux.length){
                 this.setState({shoppingCart: shoppingCartAux});
             }}, 1000);
