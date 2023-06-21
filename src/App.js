@@ -21,8 +21,8 @@ import AdminSeasonPage from './app/AdminSeasonPage'
 import AdminCategoryCreatePage from './app/AdminCategoryCreatePage'
 import AdminProductCreatePage from './app/AdminProductCreatePage'
 import AdminProductSeasonCreatePage from './app/AdminProductSeasonCreatePage'
-import PrivateRoute from './PrivateRoute';
 import AcessoNegado from './app/AcessoNegado';
+import Protected from './Protected';
 
 function RegistrationLayout({ children }) {
   return (
@@ -44,6 +44,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log(JSON.parse(sessionStorage.getItem('user')));
     if (sessionStorage.getItem('user') != null) {
       this.setState({isAuth : true});
       if (JSON.parse(sessionStorage.getItem('user')).email.includes('@admin.ipt.pt')) {
@@ -65,6 +66,7 @@ class App extends Component {
           <Route index element={<SplashPage />} />
           <Route path="/produtos" element={<ProdutosPage />} />
           <Route path="/login" element={<LoginPage />} />
+
           <Route
             path="/registration"
             element={
@@ -76,47 +78,79 @@ class App extends Component {
           <Route path="/product" element={<ProductDetails/>}/>
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/about" element={<SobrePage/>}/>
-          {/* {condition ? <p>Condition is true</p> : <p>Condition is false</p>} */}
           <Route
             path="/admin"
-            element={<PrivateRoute component={<AdminPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminPage />
+              </Protected>
+            }
           />
           <Route
             path="/admin/category"
-            element={<PrivateRoute component={<AdminCategoryPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminCategoryPage />
+              </Protected>
+            }
           />
           <Route
             path="/admin/person"
-            element={<PrivateRoute component={<AdminPersonPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminPersonPage />
+              </Protected>
+            }
           />
           <Route
             path="/admin/order"
-            element={<PrivateRoute component={<AdminOrderPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
-          />
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminOrderPage />
+              </Protected>
+            }          />
           <Route
             path="/admin/orderitem"
-            element={<PrivateRoute component={<AdminOrderItemPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
-          />
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminOrderItemPage />
+              </Protected>
+            }          />
           <Route
             path="/admin/product"
-            element={<PrivateRoute component={<AdminProductPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
-          />
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminProductPage />
+              </Protected>
+            }          />
           <Route
             path="/admin/productseason"
-            element={<PrivateRoute component={<AdminSeasonPage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
-          />
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminSeasonPage />
+              </Protected>
+            }          />
           <Route
             path="/admin/category/create"
-            element={<PrivateRoute component={<AdminCategoryCreatePage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
-          />
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminCategoryCreatePage />
+              </Protected>
+            }          />
           <Route
             path="/admin/product/create"
-            element={<PrivateRoute component={<AdminProductCreatePage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
-          />
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminProductCreatePage />
+              </Protected>
+            }          />
           <Route
             path="/admin/productseason/create"
-            element={<PrivateRoute component={<AdminProductSeasonCreatePage />} isAdmin={this.state.isAdmin} isAuth={this.state.isAuth} />}
-          />
+            element={
+              <Protected isAuth={sessionStorage.getItem('user') != null} isAdmin={sessionStorage.getItem('isAdmin')}>
+                <AdminProductSeasonCreatePage />
+              </Protected>
+            }          />
           <Route path="/acessoNegado" element={<AcessoNegado/>} />
         </Routes>
         {/* <Footer></Footer> */}

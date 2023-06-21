@@ -8,11 +8,16 @@ class Header extends Component {
     state = {
         isLoggedIn: false,
         modalShow: false,
+        isAdmin: false,
     }
     componentDidMount(){
         console.log(JSON.parse(sessionStorage.getItem('user')));
         if (JSON.parse(sessionStorage.getItem('user'))!= null){
           this.setState({isLoggedIn: true});
+          if (JSON.parse(sessionStorage.getItem('user')).email.includes('@admin.ipt.pt')) {
+            this.setState({isAdmin : true});
+            sessionStorage.setItem('isAdmin', true);
+          }
         }else{
           this.setState({isLoggedIn: false});
         }
@@ -69,7 +74,7 @@ class Header extends Component {
                 ):(
                   null
                 )}
-                {sessionStorage.getItem('isAdmin') === true ? (
+                {this.state.isAdmin ? (
                   <>
                   <Nav.Link href="/admin" className="d-flex align-items-center">
                     <FaKey className="me-2" />

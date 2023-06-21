@@ -21,6 +21,12 @@ class LoginPage extends Component {
       this.setState({password: evt.target.value});
     }
 
+    componentDidMount() {
+      if (sessionStorage.getItem('user') != null) {
+        window.location.href = "/";
+      }
+    }
+    
     async handleLogin(){
       if(this.state.email === '' || this.state.password === ''){
         this.setState({ showToast: true, toastMessage: 'Preencha todos os campos', toastType: 'warning' });        
@@ -36,7 +42,12 @@ class LoginPage extends Component {
           if (res.status === 200){
             let result = await res.json();
             sessionStorage.setItem('user', JSON.stringify(result));
-            window.location.href = "/";
+            if(this.state.email.includes('@admin.ipt.pt')){
+              sessionStorage.setItem('isAdmin', true);
+              window.location.href = "/admin";
+            }else{
+              window.location.href = "/";
+            }
           }else{
             this.setState({ showToast: true, toastMessage: 'Credenciais inexistentes', toastType: 'danger' });
           }
