@@ -39,7 +39,7 @@ class Carrinho extends Component {
     };
 
     async handleOrderButtonClick(){
-        
+        if (this.state.shoppingCart.size>0){
         const storedPerson = sessionStorage.getItem('user');
         const user = JSON.parse(storedPerson)
         this.setState({personId: user.person.id});
@@ -63,7 +63,7 @@ class Carrinho extends Component {
             // Handle any errors
             console.error(error);
             alert("Ocorreu um erro ao realizar a sua compra");
-          });
+          });}else alert("Carrinho de Compras Vazio");
     }
 
 
