@@ -12,6 +12,7 @@ class Carrinho extends Component {
 
         setInterval(() => {
             let shoppingCartAux = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
+            console.log(shoppingCartAux);
             if(this.state.shoppingCart.length !== shoppingCartAux.length){
                 this.setState({shoppingCart: shoppingCartAux});
             }}, 1000);
@@ -97,7 +98,7 @@ class Carrinho extends Component {
                         </strong>
                         {this.state.shoppingCart.map((item) => (
                             <p key={item.id} style={{height:"80px"}}>
-                                <img src={/*`http://localhost:5072/images/${item.imagePath}`*/`https://static.bershka.net/4/photos2/2023/V/0/1/p/0496/538/505/173d444fbaa583a28d1b832b4edc0e0c-0496538505_2_3_0.jpg?imwidth=850&impolicy=bershka-itxmedium&imformat=generic`} style={{width:"8%"}}></img>
+                                <img src={`http://localhost:5072/images/${item.image}`} style={{width:"8%"}}></img>
                                 <span style={{ display: 'inline-block', width: '60px', marginLeft:"2%"}}>{item.number}</span>
                                 <span style={{ display: 'inline-block', width: '100px' }}>{item.name}</span>
                                 <span style={{ display: 'inline-block', width: '80px' }}>{item.size}</span>

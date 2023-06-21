@@ -85,14 +85,15 @@ class ProdutosPage extends Component {
                 gridTemplateRows: "repeat(auto, 2fr)", gap: "20px 20px",
                 marginBottom:"30%"}}>
           {filteredProducts.map((product) =>(
-              <Card className="h-100" style={{}}>
+              <Card className="h" style={{height: "500px"}}>
+                <div style={{minHeight:"75%", maxHeight:"75%"}}>
                 <NavLink to={`/product?id=${product.id}`}>
                   <Card.Img variant="top" src={`http://localhost:5072/images/${product.imagePath}`} 
                     className="card-image" 
-                    style={{ maxWidth:"fit-content", height: "auto", objectFit: "cover", alignSelf:"center"}}
+                    style={{maxHeight:"100%", minHeight:"100%", height: "auto", objectFit: "cover", alignSelf:"center"}}
                   />
-                </NavLink>
-                <Card.Body className="d-flex flex-column justify-content-between" style={{textAlign:"left"}}>
+                </NavLink></div>
+                <Card.Body className="d-flex flex-column justify-content-between" style={{textAlign:"left", minHeight:"24%", maxHeight:"24%"}}>
                   <div>
                     <Card.Title className="card-title" style={{font:"message-box", cursor:"pointer"}} >{product.name}</Card.Title>
                     <Card.Text className="card-description">{product.description}</Card.Text>
