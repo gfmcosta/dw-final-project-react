@@ -23,6 +23,7 @@ import AdminProductCreatePage from './app/AdminProductCreatePage'
 import AdminProductSeasonCreatePage from './app/AdminProductSeasonCreatePage'
 import AcessoNegado from './app/AcessoNegado';
 import Protected from './Protected';
+import OrderHistory from './app/OrderHistory';
 
 function RegistrationLayout({ children }) {
   return (
@@ -151,6 +152,7 @@ class App extends Component {
                 <AdminProductSeasonCreatePage />
               </Protected>
             }          />
+          <Route path="/orderhistory" element={<OrderHistory/>} />
           <Route path="/acessoNegado" element={<AcessoNegado/>} />
         </Routes>
         {/* <Footer></Footer> */}

@@ -39,7 +39,8 @@ class Carrinho extends Component {
     };
 
     async handleOrderButtonClick(){
-        if (this.state.shoppingCart.size>0){
+        console.log(this.state.shoppingCart);
+        if (this.state.shoppingCart!= null && this.state.shoppingCart != []){
         const storedPerson = sessionStorage.getItem('user');
         const user = JSON.parse(storedPerson)
         this.setState({personId: user.person.id});
@@ -63,7 +64,8 @@ class Carrinho extends Component {
             // Handle any errors
             console.error(error);
             alert("Ocorreu um erro ao realizar a sua compra");
-          });}else alert("Carrinho de Compras Vazio");
+          });
+        }else alert("Carrinho de Compras Vazio");
     }
 
 

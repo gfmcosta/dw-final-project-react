@@ -306,6 +306,9 @@ class ProfilePage extends Component{
                     <Button variant="primary" style={{float:"right", marginRight:"13%"}} onClick={() => this.handleProfileChange()} block>
                       {this.state.editMode ? "Guardar" : "Alterar"}
                     </Button>
+                    <Button variant="primary" style={{marginTop:"5%"}} onClick={() => window.location.href="/orderHistory"} block>
+                      Histórico de Compras
+                    </Button>
                     <Toast show={this.state.showToast} onClose={() => this.setState({showToast:false})} delay={5000} autohide   style={{ position: 'fixed', top: '18%', right: '20px' }} bg={this.state.toastType}>
                           <Toast.Header>
                             <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
