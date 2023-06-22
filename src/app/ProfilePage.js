@@ -135,7 +135,7 @@ class ProfilePage extends Component{
             this.setState({ showToast: true, toastMessage: 'Código-Postal Inválido', toastType: 'warning' });
         }
         else if(
-          yearDiff > 150
+          yearDiff > 150 
           ){
             this.setState({ showToast: true, toastMessage: 'Data de Nascimento Inválida', toastType: 'warning' });
         }
