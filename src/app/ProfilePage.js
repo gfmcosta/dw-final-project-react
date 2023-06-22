@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button, Toast } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import "./ProfilePage.css"
+import { Today } from '@mui/icons-material';
 
 class ProfilePage extends Component{
     state={
@@ -109,7 +110,36 @@ class ProfilePage extends Component{
       }
 
       async handleProfileChange(){
-        if(this.state.editMode){
+        const numberRegex = /^\d+$/;
+        const postalCodeRegex = /^\d{4}-\d{3} [A-Za-z]+$/;
+        const currentDate = new Date();
+        const yearDiff = currentDate.getFullYear() - this.state.dataNasc.getFullYear();
+        if(
+          this.state.name=='' ||
+          this.state.phoneNumber=='' ||
+          this.state.address=='' ||
+          this.state.postalCode=='' ||
+          this.state.dataNasc=='' ||
+          this.state.gender==''
+        ){
+          this.setState({ showToast: true, toastMessage: 'Preencha todos os campos', toastType: 'warning' });
+        }
+        else if(
+          !numberRegex.test(this.state.phoneNumber)
+          ){
+            this.setState({ showToast: true, toastMessage: 'Telemóvel inválido', toastType: 'warning' });
+        }
+        else if(
+          !postalCodeRegex.test(this.state.postalCode)
+          ){
+            this.setState({ showToast: true, toastMessage: 'Código-Postal Inválido', toastType: 'warning' });
+        }
+        else if(
+          yearDiff > 150
+          ){
+            this.setState({ showToast: true, toastMessage: 'Data de Nascimento Inválida', toastType: 'warning' });
+        }
+        else if(this.state.editMode){
           const data = {
             name: this.state.name,
             phoneNumber: this.state.phoneNumber,
@@ -233,22 +263,6 @@ class ProfilePage extends Component{
                             />
                     </Form.Group>
                 </div>
-                <div className="center" >
-                    <Form.Group controlId="formPhoneNumber">
-                        <Form.Label>Data de Nascimento</Form.Label>
-                        <DatePicker
-                          selected={this.state.dataNasc}
-                          onChange={(date) => this.handleDataNasc(date)}
-                          dateFormat="dd/MM/yyyy"
-                          placeholderText="Selecione a data de nascimento"
-                          maxDate={maxDate}
-                          showMonthDropdown
-                          showYearDropdown
-                          dropdownMode="select"
-                          disabled={!this.state.editMode}
-                        />
-                    </Form.Group>
-                </div>
                 
                 <div style={{justifyContent:"center"}}>
                 <Form.Group controlId="formGender">
@@ -265,6 +279,24 @@ class ProfilePage extends Component{
                     <option value = "F">Feminino</option>
                     </Form.Select>
                 </Form.Group>
+                </div>
+
+                <div className="center" >
+                    <Form.Group>
+                        <Form.Label>Data de Nascimento</Form.Label>
+                        <DatePicker
+                        style={{display: "flex"}}
+                          selected={this.state.dataNasc}
+                          onChange={(date) => this.handleDataNasc(date)}
+                          dateFormat="dd/MM/yyyy"
+                          placeholderText="Selecione a data de nascimento"
+                          maxDate={maxDate}
+                          showMonthDropdown
+                          showYearDropdown
+                          dropdownMode="select"
+                          disabled={!this.state.editMode}
+                        />
+                    </Form.Group>
                 </div>
 
                 <div>
