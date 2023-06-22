@@ -29,7 +29,7 @@ class ProdutosPage extends Component {
       method: 'GET',
       redirect: 'follow'
     };
-    let res = await fetch(`http://localhost:5072/API/Products`, requestOptions).catch(error => console.log('error', error));
+    let res = await fetch(`https://dw-final-project.azurewebsites.net/API/Products`, requestOptions).catch(error => console.log('error', error));
     console.log(res);
     if (res !== undefined && res.status === 200){
       let result = await res.json();
@@ -71,7 +71,7 @@ class ProdutosPage extends Component {
               <Card className="h" style={{height: "500px"}}>
                 <div style={{minHeight:"75%", maxHeight:"75%"}}>
                 <NavLink to={`/product?id=${product.id}`}>
-                  <Card.Img variant="top" src={`http://localhost:5072/images/${product.imagePath}`} 
+                  <Card.Img variant="top" src={`https://dw-final-project.azurewebsites.net/images/${product.imagePath}`} 
                     className="card-image" 
                     style={{maxHeight:"100%", minHeight:"100%", height: "auto", objectFit: "cover", alignSelf:"center"}}
                   />

@@ -11,7 +11,7 @@ class AdminCategoryCreatePage extends Component {
     const desc = this.state.description;
   
     try {
-      const response = await fetch('http://localhost:5072/API/category/create', {
+      const response = await fetch('https://dw-final-project.azurewebsites.net/API/category/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

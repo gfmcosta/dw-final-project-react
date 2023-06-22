@@ -42,7 +42,7 @@ class ProfilePage extends Component{
         method: 'GET',
         redirect: 'follow'
       };
-      let res = await fetch(`http://localhost:5072/API/Profile/${user.person.id}`, requestOptions).catch(error => console.log('error', error));
+      let res = await fetch(`https://dw-final-project.azurewebsites.net/API/Profile/${user.person.id}`, requestOptions).catch(error => console.log('error', error));
       if (res !== undefined && res.status==200){
         let result = await res.json();
         console.log(result)
@@ -52,7 +52,7 @@ class ProfilePage extends Component{
         this.setState({ name, email, password, phoneNumber, address, postalCode, gender, imagePath});
         this.setState({ dataNasc: convertedDataNasc });
         console.log(this.state.imagePath)
-        this.setState({strSource: `http://localhost:5072/images/${this.state.imagePath}`})
+        this.setState({strSource: `https://dw-final-project.azurewebsites.net/images/${this.state.imagePath}`})
       }else{
         this.setState({ showToast: true, toastMessage: 'Ocorreu um erro ao carregar o perfil', toastType: 'danger' });
       }
@@ -151,7 +151,7 @@ class ProfilePage extends Component{
           };
           console.log(this.state.name)
 
-          await fetch(`http://localhost:5072/API/updateProfile/${this.state.id}`, {
+          await fetch(`https://dw-final-project.azurewebsites.net/API/updateProfile/${this.state.id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

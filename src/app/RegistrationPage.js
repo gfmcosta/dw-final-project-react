@@ -127,7 +127,7 @@ class RegistrationPage extends Component{
             gender: this.state.gender,
             imagePath: this.state.imagePath,
           };
-          await fetch(`http://localhost:5072/API/Register`, {
+          await fetch(`https://dw-final-project.azurewebsites.net/API/Register`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

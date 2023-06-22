@@ -19,7 +19,7 @@ class AdminProductCreatePage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-        let res = await fetch(`http://localhost:5072/API/productseason`, requestOptions).catch(error => console.log('error', error));
+        let res = await fetch(`https://dw-final-project.azurewebsites.net/API/productseason`, requestOptions).catch(error => console.log('error', error));
         let result = await res.json();
         if (res.status==200){
           this.setState({epoca: result});
@@ -43,7 +43,7 @@ class AdminProductCreatePage extends Component {
         event.preventDefault(); // Prevent default form submission      
         try {
           const data ={name: this.state.name, description: this.state.description, quantity: this.state.quantity, priceAux: this.state.priceAux, imagePath: this.state.imagePath, seasonFK: this.state.seasonFK}
-          const response = await fetch('http://localhost:5072/API/product/create', {
+          const response = await fetch('https://dw-final-project.azurewebsites.net/API/product/create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

@@ -88,7 +88,7 @@ class ProductDetails extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-        let res = await fetch(`http://localhost:5072/API/Products/${s}`, requestOptions).catch(error => console.log('error', error));;
+        let res = await fetch(`https://dw-final-project.azurewebsites.net/API/Products/${s}`, requestOptions).catch(error => console.log('error', error));;
         if(res !== undefined && res.status === 200){
           let result = await res.json();
           this.setState({products: result});
@@ -106,7 +106,7 @@ class ProductDetails extends Component {
                 <div className="row" >
                     <div className="col-md-6">
                         <img
-                        src={`http://localhost:5072/images/${this.state.products.imagePath}`}
+                        src={`https://dw-final-project.azurewebsites.net/images/${this.state.products.imagePath}`}
                         alt="Product"
                         className="img-fluid"
                         />
@@ -117,7 +117,7 @@ class ProductDetails extends Component {
                         <p>Cor</p>
                         <div className="col-md-6" style={{maxWidth:"200px"}}>
                             <img
-                            src={`http://localhost:5072/images/${this.state.products.imagePath}`}
+                            src={`https://dw-final-project.azurewebsites.net/images/${this.state.products.imagePath}`}
                             alt="Product"
                             className="img-fluid"
                             style={{width:"40%", cursor:"pointer", border:"2px solid black"}}

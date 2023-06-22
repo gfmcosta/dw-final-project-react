@@ -45,7 +45,7 @@ class Carrinho extends Component {
         const user = JSON.parse(storedPerson)
         this.setState({personId: user.person.id});
         console.log(this.state.personId)
-        await fetch(`http://localhost:5072/API/orders/${user.person.id}`, {
+        await fetch(`https://dw-final-project.azurewebsites.net/API/orders/${user.person.id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ class Carrinho extends Component {
                         </strong>
                         {this.state.shoppingCart.map((item) => (
                             <p key={item.id} style={{height:"80px"}}>
-                                <img src={`http://localhost:5072/images/${item.image}`} style={{width:"8%"}}></img>
+                                <img src={`https://dw-final-project.azurewebsites.net/images/${item.image}`} style={{width:"8%"}}></img>
                                 <span style={{ display: 'inline-block', width: '60px', marginLeft:"2%"}}>{item.number}</span>
                                 <span style={{ display: 'inline-block', width: '100px' }}>{item.name}</span>
                                 <span style={{ display: 'inline-block', width: '80px' }}>{item.size}</span>

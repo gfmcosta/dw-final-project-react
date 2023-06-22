@@ -20,7 +20,7 @@ class OrderHistory extends Component {
           };
           const user = JSON.parse(sessionStorage.getItem('user'));
           console.log(user);
-          let res = await fetch(`http://localhost:5072/API/orderItems/${order.id}`, requestOptions).catch(error => console.log('error', error));
+          let res = await fetch(`https://dw-final-project.azurewebsites.net/API/orderItems/${order.id}`, requestOptions).catch(error => console.log('error', error));
           console.log(res);
           if (res !== undefined && res.status === 200){
             let result = await res.json();
@@ -45,7 +45,7 @@ class OrderHistory extends Component {
           };
           const user = JSON.parse(sessionStorage.getItem('user'));
           console.log(user);
-          let res = await fetch(`http://localhost:5072/API/OrderHistory/${user.person.id}`, requestOptions).catch(error => console.log('error', error));
+          let res = await fetch(`https://dw-final-project.azurewebsites.net/API/OrderHistory/${user.person.id}`, requestOptions).catch(error => console.log('error', error));
           console.log(res);
           if (res !== undefined && res.status === 200){
             let result = await res.json();
@@ -100,7 +100,7 @@ class OrderHistory extends Component {
               </p>
               {this.state.orderItems.map((item,index) => (
                     <p key={item.id} style={{height:"80px"}}>
-                    <img src={`http://localhost:5072/images/${item.product.imagePath}`} style={{width:"8%"}}></img>
+                    <img src={`https://dw-final-project.azurewebsites.net/images/${item.product.imagePath}`} style={{width:"8%"}}></img>
                     <span style={{ display: 'inline-block', width: '60px', marginLeft:"2%"}}>{index+1}</span>
                     <span style={{ display: 'inline-block', width: '100px' }}>{item.product.name}</span>
                     <span style={{ display: 'inline-block', width: '80px' }}>{item.size}</span>

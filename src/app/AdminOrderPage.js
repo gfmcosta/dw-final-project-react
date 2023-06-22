@@ -12,7 +12,7 @@ class AdminOrderPage extends Component {
           method: 'GET',
           redirect: 'follow'
         };
-        let res = await fetch(`http://localhost:5072/API/Order`, requestOptions).catch(error => console.log('error', error));;
+        let res = await fetch(`https://dw-final-project.azurewebsites.net/API/Order`, requestOptions).catch(error => console.log('error', error));;
         let result = await res.json();
         console.log(result);
         if (res.status === 200){

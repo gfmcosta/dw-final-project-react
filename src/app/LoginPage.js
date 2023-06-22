@@ -36,7 +36,7 @@ class LoginPage extends Component {
           redirect: 'follow'
         };
         const encodedPassword = encodeURIComponent(this.state.password);
-        let res = await fetch(`http://localhost:5072/API/Login/${this.state.email}/${encodedPassword}`, requestOptions).catch(error => console.log('error', error));;
+        let res = await fetch(`https://dw-final-project.azurewebsites.net/API/Login/${this.state.email}/${encodedPassword}`, requestOptions).catch(error => console.log('error', error));;
         console.log(res);
         if(res!==undefined){
           if (res.status === 200){
