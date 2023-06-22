@@ -6,7 +6,7 @@ class SobrePage extends Component {
     render(){
 
         return(
-            <div className="main" style={{width:"45%", height:"fit-content", marginTop:"300px"}}>
+            <div className="main" style={{width:"45%", height:"fit-content", marginTop:"25%"}}>
                 <div
                 style={{display: "grid", justifyContent:"center",
                 gridTemplateColumns: "400px 400px",
