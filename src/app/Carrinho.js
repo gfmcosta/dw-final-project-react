@@ -40,32 +40,34 @@ class Carrinho extends Component {
 
     async handleOrderButtonClick(){
         console.log(this.state.shoppingCart);
-        if (this.state.shoppingCart!= null && this.state.shoppingCart != []){
-        const storedPerson = sessionStorage.getItem('user');
-        const user = JSON.parse(storedPerson)
-        this.setState({personId: user.person.id});
-        console.log(this.state.personId)
-        await fetch(`https://dw-final-project.azurewebsites.net/API/orders/${user.person.id}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.shoppingCart)
-          }).then(response => {
-            if(response.status === 200){
-                alert("Compra realizada com sucesso");
-                this.handleDeleteButtonClick();
-                window.location.href = "/";
-            }else{
+        if (this.state.shoppingCart.length > 0){
+            const storedPerson = sessionStorage.getItem('user');
+            const user = JSON.parse(storedPerson)
+            this.setState({personId: user.person.id});
+            console.log(this.state.personId)
+            await fetch(`https://dw-final-project.azurewebsites.net/API/orders/${user.person.id}`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state.shoppingCart)
+            }).then(response => {
+                if(response.status === 200){
+                    alert("Compra realizada com sucesso");
+                    this.handleDeleteButtonClick();
+                    window.location.href = "/";
+                }else{
+                    alert("Ocorreu um erro ao realizar a sua compra");
+                            }
+                response.json()})
+            .catch(error => {
+                // Handle any errors
+                console.error(error);
                 alert("Ocorreu um erro ao realizar a sua compra");
-                        }
-            response.json()})
-          .catch(error => {
-            // Handle any errors
-            console.error(error);
-            alert("Ocorreu um erro ao realizar a sua compra");
-          });
-        }else alert("Carrinho de Compras Vazio");
+            });
+        }else{
+            alert("Carrinho de Compras Vazio");
+        }
     }
 
 
