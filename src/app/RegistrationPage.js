@@ -68,11 +68,54 @@ class RegistrationPage extends Component{
   
       
       async handleRegistration(){
-        if(this.state.name=='' || this.state.email==''|| this.state.password=='' || this.state.phoneNumber=='' ||
-        this.state.address=='' || this.state.postalCode=='' || this.state.dataNasc=='' || this.state.gender=='' || this.state.email.includes("@admin.ipt.pt")){
+        const uppercaseRegex = /[A-Z]/;
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+        const numberRegex = /^\d+$/;
+        const postalCodeRegex = /^\d{4}-\d{3} [A-Za-z]+$/;
+        const currentDate = new Date();
+        const yearDiff = currentDate.getFullYear() - this.state.dataNasc.getFullYear();
+        if(
+          this.state.name=='' ||
+          this.state.email==''||
+          this.state.password==''||
+          this.state.phoneNumber=='' ||
+          this.state.address=='' ||
+          this.state.postalCode=='' ||
+          this.state.dataNasc=='' ||
+          this.state.gender==''
+        ){
           this.setState({ showToast: true, toastMessage: 'Preencha todos os campos', toastType: 'warning' });
-        }else{
-
+        }
+        else if(
+          this.state.email.includes("@admin.ipt.pt") ||
+          !this.state.email.includes("@") ||
+          !this.state.email.includes(".")
+          ){
+            this.setState({ showToast: true, toastMessage: 'Email Inválido', toastType: 'warning' });
+        }
+        else if(
+          !uppercaseRegex.test(this.state.password) ||
+          !specialCharRegex.test(this.state.password) ||
+          this.state.password.length < 6
+          ){
+            this.setState({ showToast: true, toastMessage: 'Password Inválida - Requisitos:-6 Caracteres -1 Caractere especial -1 Letra Maíuscula', toastType: 'warning' });
+        }
+        else if(
+          !numberRegex.test(this.state.phoneNumber)
+          ){
+            this.setState({ showToast: true, toastMessage: 'Telemóvel inválido', toastType: 'warning' });
+        }
+        else if(
+          !postalCodeRegex.test(this.state.postalCode)
+          ){
+            this.setState({ showToast: true, toastMessage: 'Código-Postal Inválido', toastType: 'warning' });
+        }
+        else if(
+          yearDiff > 150
+          ){
+            this.setState({ showToast: true, toastMessage: 'Data de Nascimento Inválida', toastType: 'warning' }); console.log(yearDiff);
+        }
+        else{
           const data = {
             name: this.state.name,
             email: this.state.email,
