@@ -12,7 +12,7 @@ class AdminCategoryCreatePage extends Component {
 
     try {
       const response = await fetch(
-        "http://atsoc.somee.com/backend/API/category/create",
+        "https://atsoc.somee.com/backend/API/category/create",
         {
           method: "POST",
           headers: {

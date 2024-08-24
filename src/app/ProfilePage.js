@@ -42,7 +42,7 @@ class ProfilePage extends Component {
       redirect: "follow",
     };
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/Profile/${user.person.id}`,
+      `https://atsoc.somee.com/backend/API/Profile/${user.person.id}`,
       requestOptions
     ).catch((error) => console.log("error", error));
     if (res !== undefined && res.status == 200) {
@@ -72,7 +72,7 @@ class ProfilePage extends Component {
       this.setState({ dataNasc: convertedDataNasc });
       console.log(this.state.imagePath);
       this.setState({
-        strSource: `http://atsoc.somee.com/backend/images/${this.state.imagePath}`,
+        strSource: `https://atsoc.somee.com/backend/images/${this.state.imagePath}`,
       });
     } else {
       this.setState({
@@ -184,7 +184,7 @@ class ProfilePage extends Component {
       console.log(this.state.name);
 
       await fetch(
-        `http://atsoc.somee.com/backend/API/updateProfile/${this.state.id}`,
+        `https://atsoc.somee.com/backend/API/updateProfile/${this.state.id}`,
         {
           method: "POST",
           headers: {

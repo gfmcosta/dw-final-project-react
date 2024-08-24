@@ -38,7 +38,7 @@ class ProdutosPage extends Component {
       redirect: "follow",
     };
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/Products`,
+      `https://atsoc.somee.com/backend/API/Products`,
       requestOptions
     ).catch((error) => console.log("error", error));
     console.log(res);
@@ -93,7 +93,7 @@ class ProdutosPage extends Component {
                 <NavLink to={`/product?id=${product.id}`}>
                   <Card.Img
                     variant="top"
-                    src={`http://atsoc.somee.com/backend/images/${product.imagePath}`}
+                    src={`https://atsoc.somee.com/backend/images/${product.imagePath}`}
                     className="card-image"
                     style={{
                       maxHeight: "100%",

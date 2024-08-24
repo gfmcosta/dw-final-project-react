@@ -41,7 +41,7 @@ class LoginPage extends Component {
       };
       const encodedPassword = encodeURIComponent(this.state.password);
       let res = await fetch(
-        `http://atsoc.somee.com/backend/API/Login/${this.state.email}/${encodedPassword}`,
+        `https://atsoc.somee.com/backend/API/Login/${this.state.email}/${encodedPassword}`,
         requestOptions
       ).catch((error) => console.log("error", error));
       console.log(res);

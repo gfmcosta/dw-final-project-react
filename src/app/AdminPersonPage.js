@@ -12,7 +12,7 @@ class AdminPersonPage extends Component {
       redirect: "follow",
     };
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/Person`,
+      `https://atsoc.somee.com/backend/API/Person`,
       requestOptions
     ).catch((error) => console.log("error", error));
     let result = await res.json();

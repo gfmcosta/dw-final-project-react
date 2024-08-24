@@ -12,7 +12,7 @@ class AdminSeasonPage extends Component {
       redirect: "follow",
     };
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/productseason`,
+      `https://atsoc.somee.com/backend/API/productseason`,
       requestOptions
     ).catch((error) => console.log("error", error));
     let result = await res.json();

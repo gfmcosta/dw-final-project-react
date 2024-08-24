@@ -140,7 +140,7 @@ class RegistrationPage extends Component {
         gender: this.state.gender,
         imagePath: this.state.imagePath,
       };
-      await fetch(`http://atsoc.somee.com/backend/API/Register`, {
+      await fetch(`https://atsoc.somee.com/backend/API/Register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

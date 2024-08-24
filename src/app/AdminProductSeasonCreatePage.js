@@ -11,7 +11,7 @@ class AdminProductSeasonCreatePage extends Component {
 
     try {
       const response = await fetch(
-        "http://atsoc.somee.com/backend/API/seasonproduct/create",
+        "https://atsoc.somee.com/backend/API/seasonproduct/create",
         {
           method: "POST",
           headers: {

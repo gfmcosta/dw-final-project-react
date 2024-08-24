@@ -46,7 +46,7 @@ class Carrinho extends Component {
       this.setState({ personId: user.person.id });
       console.log(this.state.personId);
       await fetch(
-        `http://atsoc.somee.com/backend/API/orders/${user.person.id}`,
+        `https://atsoc.somee.com/backend/API/orders/${user.person.id}`,
         {
           method: "POST",
           headers: {
@@ -126,7 +126,7 @@ class Carrinho extends Component {
               {this.state.shoppingCart.map((item) => (
                 <p key={item.id} style={{ height: "80px" }}>
                   <img
-                    src={`http://atsoc.somee.com/backend/images/${item.image}`}
+                    src={`https://atsoc.somee.com/backend/images/${item.image}`}
                     style={{ width: "8%" }}
                   ></img>
                   <span

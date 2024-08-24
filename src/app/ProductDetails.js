@@ -110,7 +110,7 @@ class ProductDetails extends Component {
       redirect: "follow",
     };
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/Products/${s}`,
+      `https://atsoc.somee.com/backend/API/Products/${s}`,
       requestOptions
     ).catch((error) => console.log("error", error));
     if (res !== undefined && res.status === 200) {
@@ -136,7 +136,7 @@ class ProductDetails extends Component {
         <div className="row">
           <div className="col-md-6">
             <img
-              src={`http://atsoc.somee.com/backend/images/${this.state.products.imagePath}`}
+              src={`https://atsoc.somee.com/backend/images/${this.state.products.imagePath}`}
               alt="Product"
               className="img-fluid"
             />
@@ -151,7 +151,7 @@ class ProductDetails extends Component {
             <p>Cor</p>
             <div className="col-md-6" style={{ maxWidth: "200px" }}>
               <img
-                src={`http://atsoc.somee.com/backend/images/${this.state.products.imagePath}`}
+                src={`https://atsoc.somee.com/backend/images/${this.state.products.imagePath}`}
                 alt="Product"
                 className="img-fluid"
                 style={{

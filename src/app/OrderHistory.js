@@ -28,7 +28,7 @@ class OrderHistory extends Component {
     const user = JSON.parse(sessionStorage.getItem("user"));
     console.log(user);
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/orderItems/${order.id}`,
+      `https://atsoc.somee.com/backend/API/orderItems/${order.id}`,
       requestOptions
     ).catch((error) => console.log("error", error));
     console.log(res);
@@ -59,7 +59,7 @@ class OrderHistory extends Component {
     const user = JSON.parse(sessionStorage.getItem("user"));
     console.log(user);
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/OrderHistory/${user.person.id}`,
+      `https://atsoc.somee.com/backend/API/OrderHistory/${user.person.id}`,
       requestOptions
     ).catch((error) => console.log("error", error));
     console.log(res);
@@ -160,7 +160,7 @@ class OrderHistory extends Component {
                 {this.state.orderItems.map((item, index) => (
                   <p key={item.id} style={{ height: "80px" }}>
                     <img
-                      src={`http://atsoc.somee.com/backend/images/${item.product.imagePath}`}
+                      src={`https://atsoc.somee.com/backend/images/${item.product.imagePath}`}
                       style={{ width: "8%" }}
                     ></img>
                     <span

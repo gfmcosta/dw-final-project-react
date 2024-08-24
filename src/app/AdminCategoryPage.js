@@ -12,7 +12,7 @@ class AdminCategoryPage extends Component {
       redirect: "follow",
     };
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/Category`,
+      `https://atsoc.somee.com/backend/API/Category`,
       requestOptions
     ).catch((error) => console.log("error", error));
     let result = await res.json();

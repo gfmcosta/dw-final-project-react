@@ -12,7 +12,7 @@ class AdminOrderPage extends Component {
       redirect: "follow",
     };
     let res = await fetch(
-      `http://atsoc.somee.com/backend/API/Order`,
+      `https://atsoc.somee.com/backend/API/Order`,
       requestOptions
     ).catch((error) => console.log("error", error));
     let result = await res.json();
