@@ -1,0 +1,36 @@
+.card-image {
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .card-title:hover {
+    text-decoration: underline;
+  }
+  
+  .card-description {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .btn-primary {
+    background-color: #f4442e;
+    border-color: #f4442e;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #f65e4f;
+    border-color: #f65e4f;
+  }
+  
+  .form-select {
+    width: 200px;
+  }
+  
+  @media (max-width: 576px) {
+    .form-select {
+      width: 100%;
+    }
+  }
+  
